@@ -5,6 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/sellspot_splash"
-    tools:context=".SpllashActivity">
+    tools:context=".activities.SpllashActivity">
+
+<com.example.sellspot.utils.SSTextViewBold
+    android:id="@+id/tv_app_name"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

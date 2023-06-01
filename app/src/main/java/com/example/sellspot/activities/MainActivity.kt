@@ -1,7 +1,8 @@
-package com.example.sellspot
+package com.example.sellspot.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.sellspot.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

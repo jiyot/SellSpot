@@ -1,10 +1,12 @@
-package com.example.sellspot
+package com.example.sellspot.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import com.example.sellspot.R
+
 
 class SpllashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +21,14 @@ class SpllashActivity : AppCompatActivity() {
         Handler().postDelayed(
             {
                 // Launch the Main Activity
-                startActivity(Intent(this@SpllashActivity, MainActivity::class.java))
+                startActivity(Intent(this@SpllashActivity, LoginActivity::class.java))
                 finish() // Call this when your activity is done and should be closed.
             },
             2500
         )
+
+//        val typeface: Typeface = Typeface.createFromAsset(assets, "Montserrat-Bold.ttf")
+//       tv_app_name.typeface = typeface
 
     }//onCreate
 }
