@@ -8,6 +8,8 @@ import android.text.TextUtils
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import com.example.sellspot.Firebase.FirebaseClass
+import com.example.sellspot.Model.User
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityLoginBinding
 import com.example.sellspot.databinding.ActivityRegisterBinding
@@ -67,31 +69,29 @@ class RegisterActivity : BaseActivity() {
                 .addOnCompleteListener(
                     OnCompleteListener<AuthResult> { task ->
 
-                        // Hide the progress dialog
-                        hideProgressDialog()
-
                         // If the registration is successfully done
                         if (task.isSuccessful) {
 
                             // Firebase registered user
                             val firebaseUser: FirebaseUser = task.result!!.user!!
 
-                            showErrorSnackBar(
-                                "You are registered successfully. Your user id is ${firebaseUser.uid}",
-                                false
+                            // NOTE
+                            // Here we have passed only four values in the constructor as there are only four values at registration. So, instead of giving it blank or default.
+                            // We have already added the default values in the data model class itself.
+
+                            // Instance of User data model class.
+                            val user = User(
+                                firebaseUser.uid,
+                                binding.etFirstName.text.toString().trim { it <= ' ' },
+                                binding.etLastName.text.toString().trim { it <= ' ' },
+                                binding.etEmail.text.toString().trim { it <= ' ' }
                             )
 
-                            // TODO Step 1: Sign-out the user from firebase.
-                            // START
-                            /**
-                             * Here the new user registered is automatically signed-in so we just sign-out the user from firebase
-                             * and send him to Login Screen.
-                             */
-                            FirebaseAuth.getInstance().signOut()
-                            // Finish the Register Screen
-                            finish()
-                            // END
+                            // Pass the required values in the constructor.
+                            FirebaseClass().registerUser(this@RegisterActivity, user)
+
                         } else {
+                            hideProgressDialog()
                             // If the registering is not successful then show error message.
                             showErrorSnackBar(task.exception!!.message.toString(), true)
                         }
@@ -142,5 +142,29 @@ class RegisterActivity : BaseActivity() {
                 true
             }
         }
+    }
+
+    /**
+     * A function to notify the success result of Firestore entry when the user is registered successfully.
+     */
+    fun userRegistrationSuccess() {
+
+        // Hide the progress dialog
+        hideProgressDialog()
+
+        Toast.makeText(
+            this@RegisterActivity,
+            resources.getString(R.string.register_success),
+            Toast.LENGTH_SHORT
+        ).show()
+
+
+        /**
+         * Here the new user registered is automatically signed-in so we just sign-out the user from firebase
+         * and send him to Intro Screen for Sign-In
+         */
+        FirebaseAuth.getInstance().signOut()
+        // Finish the Register Screen
+        finish()
     }
 }

@@ -4,26 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
     tools:context=".activities.LoginActivity">
 
-  <ImageView
-      android:id="@+id/iv_logo"
-      android:layout_width="match_parent"
-      android:layout_height="150dp"
-      android:layout_centerHorizontal="true"
-      android:contentDescription="@string/app_name"
-      android:src="@drawable/auth_screens_background" />
+  <FrameLayout
+      android:id="@+id/fl_header_image"
+      android:layout_width="wrap_content"
+      android:layout_height="@dimen/auth_header_image_height"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/content_description"
+        android:scaleType="fitXY"
+        android:src="@drawable/sellspot_icon" />
+
+    <ImageView
+        android:layout_width="@dimen/auth_logo_width_size"
+        android:layout_height="@dimen/auth_logo_height_size"
+        android:layout_gravity="center"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        app:tint="@color/colorWhite" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_forgot_password_activity"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top" />
+  </FrameLayout>
 
   <TextView
       android:id="@+id/tv_title"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@id/iv_logo"
-
+      android:layout_below="@id/fl_header_image"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="24dp"
       android:text="@string/title_login"
@@ -44,6 +61,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:textColor="@color/colorPrimaryText"
         android:textSize="16sp"
         tools:ignore="TouchTargetSizeCheck" />
@@ -54,6 +73,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_below="@id/til_email"
+      android:layout_marginStart="20dp"
+      android:layout_marginEnd="20dp"
       android:layout_marginTop="16dp"
       android:hint="@string/et_hint_password"
       app:hintTextColor="@color/colorSecondaryText">
@@ -68,11 +89,13 @@
         tools:ignore="TouchTargetSizeCheck" />
   </com.google.android.material.textfield.TextInputLayout>
 
-  <Button
+  <com.example.sellspot.utils.SSButton
       android:id="@+id/btn_login"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_below="@id/til_password"
+      android:layout_marginStart="20dp"
+      android:layout_marginEnd="20dp"
       android:layout_marginTop="24dp"
       android:text="@string/btn_lbl_login"
       android:textColor="@android:color/white"
@@ -82,6 +105,8 @@
       android:id="@+id/tv_forgot_password"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginStart="150dp"
+      android:layout_marginEnd="20dp"
       android:layout_below="@id/btn_login"
       android:layout_marginTop="16dp"
       android:text="@string/lbl_forgot_password"

@@ -41,4 +41,6 @@
 
     <string name="email_sent_success">\"Email sent successfully to reset your password! \"</string>
 
+    <string name="register_success">You are registered successfully.</string>
+
 </resources>

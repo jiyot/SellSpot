@@ -6,7 +6,7 @@
     <dimen name="button_background_radius">10dp</dimen>
 
 
-    <dimen name="auth_header_image_height">200dp</dimen>
+    <dimen name="auth_header_image_height">300dp</dimen>
     <dimen name="auth_logo_width_size">220dp</dimen>
     <dimen name="auth_logo_height_size">100dp</dimen>
     <dimen name="title_textSize">18sp</dimen>
