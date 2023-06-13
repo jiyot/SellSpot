@@ -1,3 +1,5 @@
+package com.example.sellspot.ui.activities
+
 import android.app.Dialog
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity

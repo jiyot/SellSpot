@@ -59,6 +59,10 @@
     <string name="err_msg_enter_mobile_number">Please enter mobile number.</string>
     <!--START-->
     <string name="msg_profile_update_success">Your profile is updated successfully.</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
     <!--END-->
 
 </resources>

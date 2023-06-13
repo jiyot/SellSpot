@@ -1,15 +1,15 @@
-package com.example.sellspot.activities
+package com.example.sellspot.ui
 
-import BaseActivity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.WindowManager
-import com.example.sellspot.Firebase.FirebaseClass
-import com.example.sellspot.Model.User
+import com.example.sellspot.firebase.FirebaseClass
+import com.example.sellspot.model.User
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityLoginBinding
+import com.example.sellspot.ui.activities.*
 import com.google.firebase.auth.FirebaseAuth
 import com.example.sellspot.utils.Constants
 
@@ -179,7 +179,7 @@ class LoginActivity : BaseActivity()  {
             startActivity(intent)
         } else {
             // Redirect the user to Main Screen after log in.
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
         }
         finish()
         // END

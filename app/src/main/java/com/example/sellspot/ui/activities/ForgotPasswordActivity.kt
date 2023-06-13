@@ -1,13 +1,10 @@
-package com.example.sellspot.activities
+package com.example.sellspot.ui.activities
 
-import BaseActivity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityForgotPasswordBinding
-import com.example.sellspot.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
 

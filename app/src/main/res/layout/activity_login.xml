@@ -8,7 +8,7 @@
     android:paddingBottom="16dp"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
-    tools:context=".activities.LoginActivity">
+    tools:context=".ui.LoginActivity">
 
   <ImageView
       android:id="@+id/iv_logo"

@@ -35,9 +35,9 @@ object Constants {
     // Firebase database field names
     const val MOBILE: String = "mobile"
     const val GENDER: String = "gender"
-    // END
 
-//    const val USER_PROFILE_IMAGE:String = "User_Profile_Image"
+    const val IMAGE: String = "image"
+    const val USER_PROFILE_IMAGE:String = "User_Profile_Image"
 
     /**
      * A function for user profile image selection from phone storage.
@@ -52,28 +52,23 @@ object Constants {
         activity.startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
     }
 
-//
-//    // START
-//    /**
-//     * A function to get the image file extension of the selected image.
-//     *
-//     * @param contentResolver ContentResolver instance.
-//     * @param uri Image file uri.
-//     */
-//    fun getFileExtension(context: Context, uri: Uri): String? {
-//        return if (uri.scheme == ContentResolver.SCHEME_CONTENT) {
-//            val mime = MimeTypeMap.getSingleton()
-//            mime.getExtensionFromMimeType(context.contentResolver.getType(uri))
-//        } else {
-//            val fileExtension = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
-//            if (fileExtension != null) {
-//                fileExtension
-//            } else {
-//                // Fallback to manual extraction if MimeTypeMap method fails
-//                val path = uri.path
-//                path?.substring(path.lastIndexOf(".") + 1)
-//            }
-//        }
-//    }
-    // END
+    /**
+     * A function to get the image file extension of the selected image.
+     *
+     * @param activity Activity reference.
+     * @param uri Image file uri.
+     */
+    fun getFileExtension(activity: Activity, uri: Uri?): String? {
+        /*
+         * MimeTypeMap: Two-way map that maps MIME-types to file extensions and vice versa.
+         *
+         * getSingleton(): Get the singleton instance of MimeTypeMap.
+         *
+         * getExtensionFromMimeType: Return the registered extension for the given MIME type.
+         *
+         * contentResolver.getType: Return the MIME type of the given content URL.
+         */
+        return MimeTypeMap.getSingleton()
+            .getExtensionFromMimeType(activity.contentResolver.getType(uri!!))
+    }
 }

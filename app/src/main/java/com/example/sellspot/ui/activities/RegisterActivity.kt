@@ -1,12 +1,12 @@
-package com.example.sellspot.activities
+package com.example.sellspot.ui.activities
 
-import BaseActivity
+import com.example.sellspot.ui.activities.BaseActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowManager
 import android.widget.Toast
-import com.example.sellspot.Firebase.FirebaseClass
-import com.example.sellspot.Model.User
+import com.example.sellspot.firebase.FirebaseClass
+import com.example.sellspot.model.User
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityRegisterBinding
 import com.google.android.gms.tasks.OnCompleteListener

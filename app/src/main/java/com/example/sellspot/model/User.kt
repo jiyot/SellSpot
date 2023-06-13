@@ -1,6 +1,5 @@
-package com.example.sellspot.Model
+package com.example.sellspot.model
 
-import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
