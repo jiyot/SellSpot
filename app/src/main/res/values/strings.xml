@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyShopPal</string>
+    <string name="app_name">SellSpot</string>
 
 
     <string name="content_description">image</string>
@@ -42,5 +42,23 @@
     <string name="email_sent_success">\"Email sent successfully to reset your password! \"</string>
 
     <string name="register_success">You are registered successfully.</string>
+
+    <string name="title_complete_profile">COMPLETE PROFILE</string>
+    <string name="et_hint_mobile_number">Mobile Number</string>
+
+    <!--TODO Step 6: Add the string resources in the strings.xml file.-->
+    <!--START-->
+    <string name="rb_lbl_male">MALE</string>
+    <string name="rb_lbl_female">FEMALE</string>
+    <string name="btn_lbl_save">Save</string>
+    <!--END-->
+
+    <string name="read_storage_permission_denied">Oops, you just denied the permission for storage. You can also allow it from settings.</string>
+
+    <string name="image_selection_failed">Image selection Failed!</string>
+    <string name="err_msg_enter_mobile_number">Please enter mobile number.</string>
+    <!--START-->
+    <string name="msg_profile_update_success">Your profile is updated successfully.</string>
+    <!--END-->
 
 </resources>

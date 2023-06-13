@@ -1,17 +1,13 @@
 package com.example.sellspot.activities
 
 import BaseActivity
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import com.example.sellspot.Firebase.FirebaseClass
 import com.example.sellspot.Model.User
 import com.example.sellspot.R
-import com.example.sellspot.databinding.ActivityLoginBinding
 import com.example.sellspot.databinding.ActivityRegisterBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult

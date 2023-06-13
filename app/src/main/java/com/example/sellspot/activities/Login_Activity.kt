@@ -6,12 +6,13 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.WindowManager
-import android.widget.Toast
 import com.example.sellspot.Firebase.FirebaseClass
 import com.example.sellspot.Model.User
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.example.sellspot.utils.Constants
+
 
 class LoginActivity : BaseActivity()  {
 
@@ -165,13 +166,23 @@ class LoginActivity : BaseActivity()  {
         hideProgressDialog()
 
         // Print the user details in the log as of now.
-        Log.i("First Name: ", user.firstName)
-        Log.i("Last Name: ", user.lastName)
-        Log.i("Email: ", user.email)
+        user.firstName?.let { Log.i("First Name: ", it) }
+        user.lastName?.let { Log.i("Last Name: ", it) }
+        user.email?.let { Log.i("Email: ", it) }
 
-        // Redirect the user to Main Screen after log in.
-        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        // TODO Step 7: Redirect the user to the UserProfile screen if it is incomplete otherwise to the Main screen.
+        // START
+        if (user.profileCompleted == 0) {
+            // If the user profile is incomplete then launch the UserProfileActivity.
+            val intent = Intent(this@LoginActivity, UserProfileActivity::class.java)
+            intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
+            startActivity(intent)
+        } else {
+            // Redirect the user to Main Screen after log in.
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        }
         finish()
+        // END
     }
 
 }
