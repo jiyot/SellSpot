@@ -12,6 +12,8 @@ class SettingsActivity : BaseActivity() {
     /**
      * This function is auto created by Android when the Activity Class is created.
      */
+
+    // commit it
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //This call the parent constructor
