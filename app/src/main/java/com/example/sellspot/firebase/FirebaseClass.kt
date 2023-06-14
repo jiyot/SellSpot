@@ -5,11 +5,16 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import androidx.fragment.app.Fragment
+import com.example.sellspot.model.Product
 import com.example.sellspot.model.User
+import com.example.sellspot.ui.activities.ui.activities.AddProductActivity
 import com.example.sellspot.ui.activities.ui.activities.LoginActivity
 import com.example.sellspot.ui.activities.ui.activities.RegisterActivity
 import com.example.sellspot.ui.activities.ui.activities.SettingsActivity
 import com.example.sellspot.ui.activities.ui.activities.UserProfileActivity
+import com.example.sellspot.ui.activities.ui.fragments.DashboardFragment
+import com.example.sellspot.ui.activities.ui.fragments.ProductsFragment
 import com.example.sellspot.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -27,7 +32,7 @@ class FirebaseClass {
      * A function to make an entry of the registered user in the FireStore database.
      */
     fun registerUser(activity: RegisterActivity, userInfo: User) {
-
+        // commit it
         // The "users" is collection name. If the collection is already created then it will not create the same one again.
         mFireStore.collection(Constants.USERS)
             // Document ID for users fields. Here the document it is the User ID.
@@ -102,10 +107,15 @@ class FirebaseClass {
                         activity.userLoggedInSuccess(user)
                     }
 
+                    // TODO Step 5: Make the changes to send the success result to respective activity.
+                    // START
                     is SettingsActivity ->{
+                        // TODO Step 7: Call the function of base class.
                         // Call a function of base activity for transferring the result to it.
                         activity.userDetailsSuccess(user)
+                        // END
                     }
+                    // END
                 }
             }
             .addOnFailureListener { e ->
@@ -114,9 +124,13 @@ class FirebaseClass {
                     is LoginActivity -> {
                         activity.hideProgressDialog()
                     }
+
+                    // TODO Step 10: Hide the progress dialog if there is any error for the respective error.
+                    // START
                     is SettingsActivity -> {
                         activity.hideProgressDialog()
                     }
+                    // END
                 }
 
                 Log.e(
@@ -169,11 +183,11 @@ class FirebaseClass {
     }
 
     // A function to upload the image to the cloud storage.
-    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
 
         //getting the storage reference
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "."
+            imageType + System.currentTimeMillis() + "."
                     + Constants.getFileExtension(
                 activity,
                 imageFileURI
@@ -199,6 +213,10 @@ class FirebaseClass {
                             is UserProfileActivity -> {
                                 activity.imageUploadSuccess(uri.toString())
                             }
+
+                            is AddProductActivity -> {
+                                activity.imageUploadSuccess(uri.toString())
+                            }
                         }
                     }
             }
@@ -207,6 +225,10 @@ class FirebaseClass {
                 // Hide the progress dialog if there is any error. And print the error in log.
                 when (activity) {
                     is UserProfileActivity -> {
+                        activity.hideProgressDialog()
+                    }
+
+                    is AddProductActivity -> {
                         activity.hideProgressDialog()
                     }
                 }
@@ -218,4 +240,104 @@ class FirebaseClass {
                 )
             }
     }
+
+    fun uploadProductDetails(activity: AddProductActivity, productInfo: Product) {
+
+        mFireStore.collection(Constants.PRODUCTS)
+            .document()
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(productInfo, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.productUploadSuccess()
+            }
+            .addOnFailureListener { e ->
+
+                activity.hideProgressDialog()
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while uploading the product details.",
+                    e
+                )
+            }
+    }
+
+    /**
+     * A function to get the products list from cloud firestore.
+     *
+     * @param fragment The fragment is passed as parameter as the function is called from fragment and need to the success result.
+     */
+//    fun getProductsList(fragment: Fragment) {
+//        // The collection name for PRODUCTS
+//        mFireStore.collection(Constants.PRODUCTS)
+//            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+//            .get() // Will get the documents snapshots.
+//            .addOnSuccessListener { document ->
+//
+//                // Here we get the list of boards in the form of documents.
+//                Log.e("Products List", document.documents.toString())
+//
+//                // Here we have created a new instance for Products ArrayList.
+//                val productsList: ArrayList<Product> = ArrayList()
+//
+//                // A for loop as per the list of documents to convert them into Products ArrayList.
+//                for (i in document.documents) {
+//
+//                    val product = i.toObject(Product::class.java)
+//                    product!!.product_id = i.id
+//
+//                    productsList.add(product)
+//                }
+//
+//                when (fragment) {
+//                    is ProductsFragment -> {
+//                        fragment.successProductsListFromFireStore(productsList)
+//                    }
+//                }
+//            }
+//            .addOnFailureListener { e ->
+//                // Hide the progress dialog if there is any error based on the base class instance.
+//                when (fragment) {
+//                    is ProductsFragment -> {
+//                        fragment.hideProgressDialog()
+//                    }
+//                }
+//                Log.e("Get Product List", "Error while getting product list.", e)
+//            }
+//    }
+
+    /**
+     * A function to get the dashboard items list. The list will be an overall items list, not based on the user's id.
+     */
+//    fun getDashboardItemsList(fragment: DashboardFragment) {
+//        // The collection name for PRODUCTS
+//        mFireStore.collection(Constants.PRODUCTS)
+//            .get() // Will get the documents snapshots.
+//            .addOnSuccessListener { document ->
+//
+//                // Here we get the list of boards in the form of documents.
+//                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+//
+//                // Here we have created a new instance for Products ArrayList.
+//                val productsList: ArrayList<Product> = ArrayList()
+//
+//                // A for loop as per the list of documents to convert them into Products ArrayList.
+//                for (i in document.documents) {
+//
+//                    val product = i.toObject(Product::class.java)!!
+//                    product.product_id = i.id
+//                    productsList.add(product)
+//                }
+//
+//                // Pass the success result to the base fragment.
+//                fragment.successDashboardItemsList(productsList)
+//            }
+//            .addOnFailureListener { e ->
+//                // Hide the progress dialog if there is any error which getting the dashboard items list.
+//                fragment.hideProgressDialog()
+//                Log.e(fragment.javaClass.simpleName, "Error while getting dashboard items list.", e)
+//            }
+//    }
 }

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowManager
 import android.widget.Toast
-import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.User
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityRegisterBinding
+import com.example.sellspot.firebase.FirebaseClass
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth

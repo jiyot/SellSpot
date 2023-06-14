@@ -11,6 +11,7 @@ object Constants {
     // Firebase Constants
     // This  is used for the collection name for USERS.
     const val USERS: String = "users"
+    const val PRODUCTS: String = "products"
 
     const val SELLSPOT_PREFERENCES: String = "SellSpotPrefs"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"
@@ -41,6 +42,10 @@ object Constants {
     const val LAST_NAME: String = "lastName"
 
     const val COMPLETE_PROFILE: String = "profileCompleted"
+
+    const val USER_ID: String = "user_id"
+
+    const val PRODUCT_IMAGE: String = "Product_Image"
 
     /**
      * A function for user profile image selection from phone storage.

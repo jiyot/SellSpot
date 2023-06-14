@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.WindowManager
-import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.User
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityLoginBinding
+import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.ui.activities.*
 import com.google.firebase.auth.FirebaseAuth
 import com.example.sellspot.utils.Constants
