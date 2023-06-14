@@ -77,7 +77,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             GlideLoader(this@UserProfileActivity).loadUserPicture(mUserDetails.image, binding.ivUserPhoto)
 
             // Set the existing values to the UI and allow user to edit except the Email ID.
-            binding.etEmail.setText(mUserDetails.firstName)
+            binding.etFirstName.setText(mUserDetails.firstName)
             binding.etLastName.setText(mUserDetails.lastName)
 
             binding.etEmail.isEnabled = false
