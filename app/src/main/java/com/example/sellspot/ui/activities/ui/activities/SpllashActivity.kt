@@ -1,10 +1,10 @@
 package com.example.sellspot.ui.activities.ui.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.example.sellspot.R
 
 
@@ -21,7 +21,7 @@ class SpllashActivity : AppCompatActivity() {
         Handler().postDelayed(
             {
                 // Launch the Main Activity
-                startActivity(Intent(this@SpllashActivity, DashboardActivity::class.java))
+                startActivity(Intent(this@SpllashActivity, LoginActivity::class.java))
                 finish() // Call this when your activity is done and should be closed.
             },
             2500

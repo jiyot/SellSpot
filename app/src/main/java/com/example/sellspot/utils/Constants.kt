@@ -1,8 +1,6 @@
 package com.example.sellspot.utils
 
 import android.app.Activity
-import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
@@ -17,8 +15,6 @@ object Constants {
     const val SELLSPOT_PREFERENCES: String = "SellSpotPrefs"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"
 
-    // Intent extra constants.
-    const val EXTRA_USER_DETAILS: String = "extra_user_details"
 
     //A unique code for asking the Read Storage Permission using this we will be check and identify in the method onRequestPermissionsResult in the Base Activity.
     const val READ_STORAGE_PERMISSION_CODE = 2
@@ -38,6 +34,13 @@ object Constants {
 
     const val IMAGE: String = "image"
     const val USER_PROFILE_IMAGE:String = "User_Profile_Image"
+
+    const val EXTRA_USER_DETAILS: String = "extra_user_details"
+
+    const val FIRST_NAME: String = "firstName"
+    const val LAST_NAME: String = "lastName"
+
+    const val COMPLETE_PROFILE: String = "profileCompleted"
 
     /**
      * A function for user profile image selection from phone storage.

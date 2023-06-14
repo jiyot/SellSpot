@@ -53,6 +53,8 @@
     <string name="btn_lbl_save">Save</string>
     <!--END-->
 
+    <string name="title_edit_profile">EDIT PROFILE</string>
+
     <string name="read_storage_permission_denied">Oops, you just denied the permission for storage. You can also allow it from settings.</string>
 
     <string name="image_selection_failed">Image selection Failed!</string>
