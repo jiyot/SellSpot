@@ -1,4 +1,4 @@
-package com.example.sellspot.ui.activities
+package com.example.sellspot.ui.activities.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import com.example.sellspot.R
-import com.example.sellspot.ui.LoginActivity
 
 
 class SpllashActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.sellspot.ui.activities.ui.home
+package com.example.sellspot.ui.activities.ui.models
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.example.sellspot.ui.activities
+package com.example.sellspot.ui.activities.ui.activities
 
 import android.Manifest
 import android.app.Activity

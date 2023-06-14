@@ -15,7 +15,11 @@
         android:theme="@style/Theme.SellSpot"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.DashboardActivity"
+            android:name=".ui.activities.ui.activities.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activities.ui.activities.DashboardActivity"
             android:exported="false"
             android:label="@string/app_name">
             <meta-data
@@ -23,22 +27,22 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.UserProfileActivity"
+            android:name=".ui.activities.ui.activities.UserProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.activities.ForgotPasswordActivity"
+            android:name=".ui.activities.ui.activities.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.RegisterActivity"
+            android:name=".ui.activities.ui.activities.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.activities.ui.activities.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.activities.SpllashActivity"
+            android:name=".ui.activities.ui.activities.SpllashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -55,7 +59,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".ui.activities.ui.activities.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
 

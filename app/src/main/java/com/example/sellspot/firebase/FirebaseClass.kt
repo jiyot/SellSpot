@@ -6,9 +6,9 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import com.example.sellspot.model.User
-import com.example.sellspot.ui.LoginActivity
-import com.example.sellspot.ui.activities.RegisterActivity
-import com.example.sellspot.ui.activities.UserProfileActivity
+import com.example.sellspot.ui.activities.ui.activities.LoginActivity
+import com.example.sellspot.ui.activities.ui.activities.RegisterActivity
+import com.example.sellspot.ui.activities.ui.activities.UserProfileActivity
 import com.example.sellspot.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

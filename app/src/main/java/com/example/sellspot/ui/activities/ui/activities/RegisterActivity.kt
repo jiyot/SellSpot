@@ -1,6 +1,5 @@
-package com.example.sellspot.ui.activities
+package com.example.sellspot.ui.activities.ui.activities
 
-import com.example.sellspot.ui.activities.BaseActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowManager

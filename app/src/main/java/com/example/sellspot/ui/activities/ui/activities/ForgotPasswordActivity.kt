@@ -1,4 +1,4 @@
-package com.example.sellspot.ui.activities
+package com.example.sellspot.ui.activities.ui.activities
 
 import android.os.Bundle
 import android.widget.Toast

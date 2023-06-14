@@ -59,10 +59,22 @@
     <string name="err_msg_enter_mobile_number">Please enter mobile number.</string>
     <!--START-->
     <string name="msg_profile_update_success">Your profile is updated successfully.</string>
-    <string name="title_activity_dashboard">DashboardActivity</string>
-    <string name="title_home">Home</string>
+    <!--    <string name="title_activity_dashboard">DashboardActivity</string>-->
+    <!--TODO Step 7: Rename the title according to the fragments.-->
+    <!--START-->
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_products">Products</string>
+    <string name="title_orders">Orders</string>
     <!--END-->
+
+    <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
+    <!--END-->
+
+    <string name="action_settings">Settings</string>
+
+    <string name="title_settings">Setting</string>
+    <string name="lbl_edit">Edit</string>
+    <string name="lbl_addresses">Addresses</string>
+    <string name="btn_lbl_logout">Logout</string>
 
 </resources>

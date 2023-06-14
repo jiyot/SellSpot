@@ -1,4 +1,4 @@
-package com.example.sellspot.ui.activities
+package com.example.sellspot.ui.activities.ui.activities
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

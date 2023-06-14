@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/sellspot_splash_screen"
-    tools:context=".ui.activities.SpllashActivity">
+    tools:context=".ui.activities.ui.activities.SpllashActivity">
 
 <com.example.sellspot.utils.SSTextViewBold
     android:id="@+id/tv_app_name"
