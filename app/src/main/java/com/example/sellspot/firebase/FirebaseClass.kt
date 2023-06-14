@@ -27,7 +27,7 @@ class FirebaseClass {
      * A function to make an entry of the registered user in the FireStore database.
      */
     fun registerUser(activity: RegisterActivity, userInfo: User) {
-
+        // commit it
         // The "users" is collection name. If the collection is already created then it will not create the same one again.
         mFireStore.collection(Constants.USERS)
             // Document ID for users fields. Here the document it is the User ID.
