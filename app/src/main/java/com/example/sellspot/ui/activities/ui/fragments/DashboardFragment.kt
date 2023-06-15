@@ -2,19 +2,16 @@ package com.example.sellspot.ui.activities.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
+import android.view.*
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.sellspot.R
 import com.example.sellspot.databinding.FragmentDashboardBinding
+import com.example.sellspot.firebase.FirebaseClass
+import com.example.sellspot.model.Product
 import com.example.sellspot.ui.activities.ui.activities.SettingsActivity
+import com.myshoppal.ui.adapters.DashboardItemsListAdapter
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : BaseFragment()  {
 
     private var _binding: FragmentDashboardBinding? = null
 
@@ -39,11 +36,6 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        textView.text = "This is dashboard Fragment"
-//        dashboardViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         return root
     }
 
@@ -56,10 +48,7 @@ class DashboardFragment : Fragment() {
         inflater.inflate(R.menu.dashboard_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
-    // END
 
-    // TODO Step 7: Override the onOptionItemSelected function and handle the action items init.
-    // START
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
@@ -73,5 +62,47 @@ class DashboardFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        getDashboardItemsList()
+    }
+
+    /**
+     * A function to get the dashboard items list from cloud firestore.
+     */
+    private fun getDashboardItemsList() {
+        // Show the progress dialog.
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        FirebaseClass().getDashboardItemsList(this@DashboardFragment)
+    }
+
+    /**
+     * A function to get the success result of the dashboard items from cloud firestore.
+     *
+     * @param dashboardItemsList
+     */
+    fun successDashboardItemsList(dashboardItemsList: ArrayList<Product>) {
+
+        // Hide the progress dialog.
+        hideProgressDialog()
+
+        if (dashboardItemsList.size > 0) {
+
+            binding.rvDashboardItems.visibility = View.VISIBLE
+            binding.tvNoDashboardItemsFound.visibility = View.GONE
+
+            binding.rvDashboardItems.layoutManager = GridLayoutManager(activity, 2)
+            binding.rvDashboardItems.setHasFixedSize(true)
+
+            val adapter = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
+            binding.rvDashboardItems.adapter = adapter
+        } else {
+            binding.rvDashboardItems.visibility = View.GONE
+            binding.tvNoDashboardItemsFound.visibility = View.VISIBLE
+        }
     }
 }

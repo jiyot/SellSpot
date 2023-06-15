@@ -77,7 +77,7 @@
 
     <dimen name="no_data_found_textSize">20sp</dimen>
 
-    <dimen name="item_list_marginTop">16dp</dimen>
+    <dimen name="item_list_marginTop">10dp</dimen>
     <dimen name="item_list_padding">10dp</dimen>
     <dimen name="item_image_padding">2dp</dimen>
     <dimen name="item_image_width">80dp</dimen>
@@ -97,8 +97,20 @@
     <dimen name="dashboard_item_textSize">12sp</dimen>
     <dimen name="dashboard_item_price_marginTop">2dp</dimen>
 
-    <!--TODO Step 3: Add the dimen resources to the dimen.xml file-->
-    <!--START-->
+
     <dimen name="delete_icon_padding">5dp</dimen>
-    <!--END-->
+
+
+    <dimen name="product_detail_image_height">250dp</dimen>
+    <dimen name="product_details_title_price_marginTop">16dp</dimen>
+    <dimen name="product_details_title_price_padding">16dp</dimen>
+    <dimen name="product_details_title_textSize">16sp</dimen>
+    <dimen name="product_details_price_textSize">14sp</dimen>
+    <dimen name="product_details_label_textSize">16sp</dimen>
+    <dimen name="product_details_label_margin">16dp</dimen>
+    <dimen name="product_details_stock_quantity_paddingStartEnd">16dp</dimen>
+    <dimen name="product_details_stock_quantity_paddingTopBottom">5dp</dimen>
+    <dimen name="product_details_description_textSize">14sp</dimen>
+    <dimen name="product_details_stock_quantity_textSize">16sp</dimen>
+
 </resources>

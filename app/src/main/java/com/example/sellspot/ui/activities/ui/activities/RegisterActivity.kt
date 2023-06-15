@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowManager
 import android.widget.Toast
-import com.example.sellspot.model.User
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityRegisterBinding
 import com.example.sellspot.firebase.FirebaseClass
+import com.example.sellspot.model.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -59,7 +59,10 @@ class RegisterActivity : BaseActivity() {
             val email: String = binding.etEmail.text.toString().trim { it <= ' ' }
             val password: String = binding.etPassword.text.toString().trim { it <= ' ' }
 
-            // Create an instance and create a register a user with email and password.
+//            val email : String = "jiyot@gmail.com"
+//            val password: String = "123456"
+
+                // Create an instance and create a register a user with email and password.
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(
                     OnCompleteListener<AuthResult> { task ->

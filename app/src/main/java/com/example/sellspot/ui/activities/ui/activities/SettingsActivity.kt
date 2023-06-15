@@ -9,8 +9,9 @@ import com.example.sellspot.databinding.ActivitySettingsBinding
 import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.User
 import com.example.sellspot.utils.Constants
-import com.example.sellspot.utils.GlideLoader
+
 import com.google.firebase.auth.FirebaseAuth
+import com.myshoppal.utils.GlideLoader
 
 /**
  * Setting screen of the app.
