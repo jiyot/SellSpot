@@ -32,6 +32,8 @@ open class DashboardItemsListAdapter(
             itemBinding.tvDashboardItemTitle.text = model.title
             itemBinding.tvDashboardItemPrice.text = "$${model.price}"
         }
+
+
     }
 
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
@@ -39,6 +41,16 @@ open class DashboardItemsListAdapter(
             // Clear any click listeners or other references here
         }
         super.onViewRecycled(holder)
+    }
+
+
+    // END
+    interface OnClickListener {
+
+        // TODO Step 4: Define a function to get the required params when user clicks on the item view in the interface.
+        // START
+        fun onClick(position: Int, product: Product)
+        // END
     }
 
     override fun getItemCount(): Int {
