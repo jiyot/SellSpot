@@ -24,6 +24,15 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ui.activities.ui.activities.CartListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.activities.ui.activities.AddProductActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

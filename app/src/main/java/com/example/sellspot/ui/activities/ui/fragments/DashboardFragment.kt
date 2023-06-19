@@ -8,6 +8,7 @@ import com.example.sellspot.R
 import com.example.sellspot.databinding.FragmentDashboardBinding
 import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.Product
+import com.example.sellspot.ui.activities.ui.activities.CartListActivity
 import com.example.sellspot.ui.activities.ui.activities.ProductDetailsActivity
 import com.example.sellspot.ui.activities.ui.activities.SettingsActivity
 import com.example.sellspot.utils.Constants
@@ -62,6 +63,14 @@ class DashboardFragment : BaseFragment()  {
 
                 return true
             }
+
+            // TODO Step 9: Handle the click event of Cart action item.
+            // START
+            R.id.action_cart -> {
+                startActivity(Intent(activity, CartListActivity::class.java))
+                return true
+            }
+            // END
         }
         return super.onOptionsItemSelected(item)
     }

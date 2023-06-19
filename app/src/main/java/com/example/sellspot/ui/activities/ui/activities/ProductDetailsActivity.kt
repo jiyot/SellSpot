@@ -134,7 +134,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         // TODO Step 10: Don't hide the progress dialog here. Please remove it from here. We have already taken care of it later.
         // START
         // Hide Progress dialog.
-        hideProgressDialog()
+        // hideProgressDialog()
+        // END
 
         // Populate the product details in the UI.
         GlideLoader(this@ProductDetailsActivity).loadProductPicture(
@@ -193,6 +194,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         // Hide the AddToCart button if the item is already in the cart.
         binding.btnAddToCart.visibility = View.GONE
         // Show the GoToCart button if the item is already in the cart. User can update the quantity from the cart list screen if he wants.
-        binding.btnAddToCart.visibility = View.VISIBLE
+        binding.btnGoToCart.visibility = View.VISIBLE
     }
 }

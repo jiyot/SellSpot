@@ -104,10 +104,7 @@ class FirebaseClass {
                         activity.userLoggedInSuccess(user)
                     }
 
-                    // TODO Step 5: Make the changes to send the success result to respective activity.
-                    // START
-                    is SettingsActivity ->{
-                        // TODO Step 7: Call the function of base class.
+                    is SettingsActivity -> {
                         // Call a function of base activity for transferring the result to it.
                         activity.userDetailsSuccess(user)
                         // END
@@ -121,13 +118,9 @@ class FirebaseClass {
                     is LoginActivity -> {
                         activity.hideProgressDialog()
                     }
-
-                    // TODO Step 10: Hide the progress dialog if there is any error for the respective error.
-                    // START
                     is SettingsActivity -> {
                         activity.hideProgressDialog()
                     }
-                    // END
                 }
 
                 Log.e(
