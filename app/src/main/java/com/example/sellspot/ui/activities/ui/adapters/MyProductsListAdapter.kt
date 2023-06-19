@@ -1,5 +1,6 @@
 package com.myshoppal.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import com.example.sellspot.databinding.ItemListLayoutBinding
 import com.example.sellspot.model.Product
 import com.example.sellspot.ui.activities.ui.activities.ProductDetailsActivity
 import com.example.sellspot.ui.activities.ui.fragments.ProductsFragment
+import com.example.sellspot.utils.Constants
 import com.myshoppal.utils.GlideLoader
 
 open class MyProductsListAdapter(
@@ -26,6 +28,7 @@ open class MyProductsListAdapter(
         return MyViewHolder(itemBinding.root)
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
 
@@ -42,6 +45,7 @@ open class MyProductsListAdapter(
             holder.itemView.setOnClickListener {
                 // Launch Product details screen.
                 val intent = Intent(context, ProductDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
                 context.startActivity(intent)
             }
         }

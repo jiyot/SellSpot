@@ -20,6 +20,8 @@ object Constants {
     //A unique code for asking the Read Storage Permission using this we will be check and identify in the method onRequestPermissionsResult in the Base Activity.
     const val READ_STORAGE_PERMISSION_CODE = 2
 
+    const val EXTRA_PRODUCT_ID: String = "extra_product_id"
+
     // A unique code of image selection from Phone Storage.
     const val PICK_IMAGE_REQUEST_CODE = 2
 

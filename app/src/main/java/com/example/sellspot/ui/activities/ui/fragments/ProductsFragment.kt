@@ -28,8 +28,6 @@ class ProductsFragment : BaseFragment() {
         setHasOptionsMenu(true)
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

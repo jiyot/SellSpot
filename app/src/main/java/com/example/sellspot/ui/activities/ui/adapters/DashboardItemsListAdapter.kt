@@ -17,13 +17,14 @@ open class DashboardItemsListAdapter(
 
     private var _itemBinding: ItemDashboardLayoutBinding? = null
     private val itemBinding get() = _itemBinding!!
+    private var onClickListener: OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         _itemBinding = ItemDashboardLayoutBinding.inflate(LayoutInflater.from(context), parent, false)
         return MyViewHolder(itemBinding.root)
     }
 
-    @SuppressLint("SetTextI18n")
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
 
@@ -32,7 +33,6 @@ open class DashboardItemsListAdapter(
             itemBinding.tvDashboardItemTitle.text = model.title
             itemBinding.tvDashboardItemPrice.text = "$${model.price}"
         }
-
 
     }
 
@@ -43,8 +43,26 @@ open class DashboardItemsListAdapter(
         super.onViewRecycled(holder)
     }
 
+    /**
+     * Gets the number of items in the list
+     */
 
+    // TODO Step 3: Create A function for OnClickListener where the Interface is the expected parameter and assigned to the global variable.
+    // START
+    /**
+     * A function for OnClickListener where the Interface is the expected parameter and assigned to the global variable.
+     *
+     * @param onClickListener
+     */
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
     // END
+
+    // TODO Step 1: Create an interface for OnClickListener.
+    /**
+     * An interface for onclick items.
+     */
     interface OnClickListener {
 
         // TODO Step 4: Define a function to get the required params when user clicks on the item view in the interface.
