@@ -10,6 +10,7 @@ import com.example.sellspot.databinding.ItemListLayoutBinding
 import com.example.sellspot.model.Product
 import com.example.sellspot.ui.activities.ui.activities.ProductDetailsActivity
 import com.example.sellspot.ui.activities.ui.fragments.ProductsFragment
+import com.example.sellspot.utils.Constants
 import com.myshoppal.utils.GlideLoader
 
 open class MyProductsListAdapter(
@@ -42,17 +43,22 @@ open class MyProductsListAdapter(
             holder.itemView.setOnClickListener {
                 // Launch Product details screen.
                 val intent = Intent(context, ProductDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
+                // TODO Step 4: Pass the product owner id through intent. The product owner id is basically the user id of the user who have add the product.
+                // START
+                intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, model.user_id)
+                // END
                 context.startActivity(intent)
             }
         }
     }
 
-    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
-//        if (holder is MyViewHolder) {
-//            holder.itemView.ibDeleteProduct.setOnClickListener(null)
-//        }
-        super.onViewRecycled(holder)
-    }
+//    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+////        if (holder is MyViewHolder) {
+////            holder.itemView.ibDeleteProduct.setOnClickListener(null)
+////        }
+//        super.onViewRecycled(holder)
+//    }
 
     override fun getItemCount(): Int {
         return list.size

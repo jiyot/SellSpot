@@ -8,7 +8,9 @@ import com.example.sellspot.R
 import com.example.sellspot.databinding.FragmentDashboardBinding
 import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.Product
+import com.example.sellspot.ui.activities.ui.activities.ProductDetailsActivity
 import com.example.sellspot.ui.activities.ui.activities.SettingsActivity
+import com.example.sellspot.utils.Constants
 import com.myshoppal.ui.adapters.DashboardItemsListAdapter
 
 class DashboardFragment : BaseFragment()  {
@@ -100,6 +102,18 @@ class DashboardFragment : BaseFragment()  {
 
             val adapter = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
             binding.rvDashboardItems.adapter = adapter
+
+            adapter.setOnClickListener(object :
+                DashboardItemsListAdapter.OnClickListener {
+                override fun onClick(position: Int, product: Product) {
+
+                    val intent = Intent(context, ProductDetailsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.user_id)
+
+                    startActivity(intent)
+                }
+            })
         } else {
             binding.rvDashboardItems.visibility = View.GONE
             binding.tvNoDashboardItemsFound.visibility = View.VISIBLE
