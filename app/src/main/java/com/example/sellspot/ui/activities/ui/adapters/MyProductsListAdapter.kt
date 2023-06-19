@@ -1,6 +1,5 @@
 package com.myshoppal.ui.adapters
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -28,7 +27,6 @@ open class MyProductsListAdapter(
         return MyViewHolder(itemBinding.root)
     }
 
-    @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
 
@@ -46,17 +44,21 @@ open class MyProductsListAdapter(
                 // Launch Product details screen.
                 val intent = Intent(context, ProductDetailsActivity::class.java)
                 intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
+                // TODO Step 4: Pass the product owner id through intent. The product owner id is basically the user id of the user who have add the product.
+                // START
+                intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, model.user_id)
+                // END
                 context.startActivity(intent)
             }
         }
     }
 
-    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
-//        if (holder is MyViewHolder) {
-//            holder.itemView.ibDeleteProduct.setOnClickListener(null)
-//        }
-        super.onViewRecycled(holder)
-    }
+//    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+////        if (holder is MyViewHolder) {
+////            holder.itemView.ibDeleteProduct.setOnClickListener(null)
+////        }
+//        super.onViewRecycled(holder)
+//    }
 
     override fun getItemCount(): Int {
         return list.size

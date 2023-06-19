@@ -49,6 +49,10 @@ object Constants {
 
     const val PRODUCT_IMAGE: String = "Product_Image"
 
+    const val EXTRA_PRODUCT_ID: String = "extra_product_id"
+
+    const val EXTRA_PRODUCT_OWNER_ID: String = "extra_product_owner_id"
+
     /**
      * A function for user profile image selection from phone storage.
      */

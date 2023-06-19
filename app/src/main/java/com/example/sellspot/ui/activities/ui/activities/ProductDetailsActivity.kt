@@ -1,10 +1,8 @@
 package com.example.sellspot.ui.activities.ui.activities
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import com.example.sellspot.R
-import com.example.sellspot.databinding.ActivityAddProductBinding
 import com.example.sellspot.databinding.ActivityProductDetailsBinding
 import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.Product
@@ -17,10 +15,10 @@ import com.myshoppal.utils.GlideLoader
 
 class ProductDetailsActivity : BaseActivity() {
 
-    private lateinit var binding: ActivityProductDetailsBinding
-
     // A global variable for product id.
     private var mProductId: String = ""
+
+    private lateinit var binding: ActivityProductDetailsBinding
 
     /**
      * This function is auto created by Android when the Activity Class is created.
@@ -28,18 +26,30 @@ class ProductDetailsActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         //This call the parent constructor
         super.onCreate(savedInstanceState)
-        // This is used to align the xml view to this class
-
         binding = ActivityProductDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if (intent.hasExtra(Constants.EXTRA_PRODUCT_ID)) {
             mProductId =
                 intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
-            Log.i("Product Id", mProductId)
         }
 
+        var productOwnerId: String = ""
+
+        if (intent.hasExtra(Constants.EXTRA_PRODUCT_OWNER_ID)) {
+            productOwnerId =
+                intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
+        }
+        // END
+
         setupActionBar()
+
+        if (FirebaseClass().getCurrentUserID() == productOwnerId) {
+            binding.btnAddToCart.visibility = View.GONE
+        } else {
+            binding.btnAddToCart.visibility  = View.VISIBLE
+        }
+        // END
 
         getProductDetails()
     }
