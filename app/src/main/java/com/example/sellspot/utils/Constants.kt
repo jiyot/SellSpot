@@ -22,10 +22,13 @@ object Constants {
     const val EXTRA_USER_DETAILS: String = "extra_user_details"
     const val EXTRA_PRODUCT_ID: String = "extra_product_id"
     const val EXTRA_PRODUCT_OWNER_ID: String = "extra_product_owner_id"
+    const val EXTRA_SELECTED_ADDRESS: String = "extra_selected_address"
+
 
     // TODO Step 5: Add a constant value to pass the address details through intent.
     // START
     const val EXTRA_ADDRESS_DETAILS: String = "AddressDetails"
+
 
     // TODO Step 1: Declare a constant to pass the value through intent in the address listing screen which will help to select the address to proceed with checkout.
     // START

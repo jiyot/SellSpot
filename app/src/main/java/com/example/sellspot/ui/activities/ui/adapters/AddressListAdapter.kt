@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sellspot.databinding.ItemAddressLayoutBinding
 import com.example.sellspot.model.Address
 import com.example.sellspot.ui.activities.ui.activities.AddEditAddressActivity
+import com.example.sellspot.ui.activities.ui.activities.CheckoutActivity
 import com.example.sellspot.utils.Constants
 
 /**
@@ -53,17 +54,20 @@ open class AddressListAdapter(
         itemBinding.tvAddressDetails.text = "${model.address}, ${model.zipCode}"
         itemBinding.tvAddressMobileNumber.text = model.mobileNumber
 
-            // START
             if (selectAddress) {
                 holder.itemView.setOnClickListener {
-                    Toast.makeText(
-                        context,
-                        "Selected address : ${model.address}, ${model.zipCode}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+//                    Toast.makeText(
+//                        context,
+//                        "Selected address : ${model.address}, ${model.zipCode}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+
+                    val intent = Intent(context, CheckoutActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_SELECTED_ADDRESS,model)
+                    context.startActivity(intent)
+                    // END
                 }
             }
-            // END
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.sellspot.ui.activities.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,7 +11,7 @@ import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.Cart
 import com.example.sellspot.model.Product
 import com.example.sellspot.ui.activities.ui.adapters.CartItemsListAdapter
-
+import com.example.sellspot.utils.Constants
 
 
 // START
@@ -39,6 +40,12 @@ class CartListActivity : BaseActivity() {
         setContentView(binding.root)
 
         setupActionBar()
+
+        binding.btnCheckout.setOnClickListener {
+            val intent = Intent(this@CartListActivity, AddressListActivity::class.java)
+            intent.putExtra(Constants.EXTRA_SELECT_ADDRESS, true)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
