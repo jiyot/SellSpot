@@ -14,6 +14,7 @@ object Constants {
     const val PRODUCTS: String = "products"
     const val CART_ITEMS: String = "cart_items"
     const val ADDRESSES: String = "addresses"
+    const val ORDERS: String = "orders"
 
     const val SELLSPOT_PREFERENCES: String = "SellSpotPrefs"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"

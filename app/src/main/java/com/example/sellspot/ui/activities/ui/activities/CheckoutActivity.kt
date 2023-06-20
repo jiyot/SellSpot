@@ -1,8 +1,10 @@
 package com.example.sellspot.ui.activities.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityAddEditAddressBinding
@@ -11,6 +13,7 @@ import com.example.sellspot.databinding.ActivityCheckoutBinding
 import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.Address
 import com.example.sellspot.model.Cart
+import com.example.sellspot.model.Order
 import com.example.sellspot.model.Product
 import com.example.sellspot.ui.activities.ui.adapters.CartItemsListAdapter
 import com.example.sellspot.utils.Constants
@@ -26,7 +29,14 @@ class CheckoutActivity : BaseActivity() {
     private lateinit var mProductsList: ArrayList<Product>
     private lateinit var mCartItemsList: ArrayList<Cart>
 
+    // TODO Step 3: Create a global variables for SubTotal and Total Amount.
+    // START
+    // A global variable for the SubTotal Amount.
+    private var mSubTotal: Double = 0.0
 
+    // A global variable for the Total Amount.
+    private var mTotalAmount: Double = 0.0
+    // END
 
     private lateinit var binding: ActivityCheckoutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,12 +71,16 @@ class CheckoutActivity : BaseActivity() {
             binding.tvCheckoutMobileNumber.text = mAddressDetails?.mobileNumber
         }
 
-        getProductList()
+        // TODO Step 11: Assign a click event to the btn place order and call the function.
+        // START
+        binding.btnPlaceOrder.setOnClickListener {
+            placeAnOrder()
+        }
+        // END
 
+        getProductList()
     }
 
-    // TODO Step 6: Create a function to setup the action bar.
-    // START
     /**
      * A function for actionBar Setup.
      */
@@ -179,4 +193,55 @@ class CheckoutActivity : BaseActivity() {
         }
         // END
     }
+
+    // TODO Step 2: Create a function to prepare the Order details to place an order.
+    // START
+    /**
+     * A function to prepare the Order details to place an order.
+     */
+    private fun placeAnOrder() {
+
+        // Show the progress dialog.
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        // TODO Step 5: Now prepare the order details based on all the required details.
+        // START
+        val order = Order(
+            FirebaseClass().getCurrentUserID(),
+            mCartItemsList,
+            mAddressDetails!!,
+            "My order ${System.currentTimeMillis()}",
+            mCartItemsList[0].image,
+            mSubTotal.toString(),
+            "10.0", // The Shipping Charge is fixed as $10 for now in our case.
+            mTotalAmount.toString(),
+        )
+        // END
+
+        // TODO Step 10: Call the function to place the order in the cloud firestore.
+        // START
+        FirebaseClass().placeOrder(this@CheckoutActivity, order)
+        // END
+    }
+    // END
+
+
+    // TODO Step 8: Create a function to notify the success result of the order placed.
+    // START
+    /**
+     * A function to notify the success result of the order placed.
+     */
+    fun orderPlacedSuccess() {
+
+        hideProgressDialog()
+
+        Toast.makeText(this@CheckoutActivity, "Your order placed successfully.", Toast.LENGTH_SHORT)
+            .show()
+
+        val intent = Intent(this@CheckoutActivity, DashboardActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
+    // END
 }
