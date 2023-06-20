@@ -20,7 +20,8 @@ import com.myshoppal.utils.GlideLoader
  */
 open class CartItemsListAdapter(
     private val context: Context,
-    private var list: ArrayList<Cart>
+    private var list: ArrayList<Cart>,
+    private val updateCartItems: Boolean
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var _itemBinding: ItemCartLayoutBinding? = null
@@ -58,8 +59,18 @@ open class CartItemsListAdapter(
                     )
                 )
             } else {
-                itemBinding.ibRemoveCartItem.visibility = View.VISIBLE
-                itemBinding.ibAddCartItem.visibility = View.VISIBLE
+
+                // TODO Step 7: Update the UI components as per the param.
+                // START
+                if (updateCartItems) {
+                    itemBinding.ibRemoveCartItem.visibility = View.VISIBLE
+                    itemBinding.ibAddCartItem.visibility = View.VISIBLE
+                    itemBinding.ibDeleteCartItem.visibility = View.VISIBLE
+                } else {
+                    itemBinding.ibRemoveCartItem.visibility = View.GONE
+                    itemBinding.ibAddCartItem.visibility = View.GONE
+                    itemBinding.ibDeleteCartItem.visibility = View.GONE
+                }
 
                 itemBinding.tvCartQuantity.setTextColor(
                     ContextCompat.getColor(
@@ -67,6 +78,7 @@ open class CartItemsListAdapter(
                         R.color.colorSecondaryText
                     )
                 )
+
             }
 
             // TODO Step 1: Assign the click event to the ib_remove_cart_item.
