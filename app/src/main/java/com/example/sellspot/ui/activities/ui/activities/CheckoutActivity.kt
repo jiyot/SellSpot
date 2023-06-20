@@ -29,8 +29,6 @@ class CheckoutActivity : BaseActivity() {
     private lateinit var mProductsList: ArrayList<Product>
     private lateinit var mCartItemsList: ArrayList<Cart>
 
-    // TODO Step 3: Create a global variables for SubTotal and Total Amount.
-    // START
     // A global variable for the SubTotal Amount.
     private var mSubTotal: Double = 0.0
 
@@ -167,7 +165,6 @@ class CheckoutActivity : BaseActivity() {
 
         // TODO Step 9: Calculate the subtotal and Total Amount.
         // START
-        var subTotal: Double = 0.0
 
         for (item in mCartItemsList) {
 
@@ -177,17 +174,17 @@ class CheckoutActivity : BaseActivity() {
                 val price = item.price.toDouble()
                 val quantity = item.cart_quantity.toInt()
 
-                subTotal += (price * quantity)
+                mSubTotal += (price * quantity)
             }
         }
 
-        binding.tvCheckoutSubTotal.text = "$$subTotal"
+        binding.tvCheckoutSubTotal.text = "$$mSubTotal"
         binding.tvCheckoutShippingCharge.text = "$10.0"
 
-        if (subTotal > 0) {
+        if (mSubTotal > 0) {
             binding.llCheckoutPlaceOrder.visibility = View.VISIBLE
-            val total = subTotal + 10
-            binding.tvCheckoutTotalAmount.text = "$$total"
+            mTotalAmount = mSubTotal + 10.0
+            binding.tvCheckoutTotalAmount.text = "$$mTotalAmount"
         } else {
             binding.llCheckoutPlaceOrder.visibility = View.GONE
         }

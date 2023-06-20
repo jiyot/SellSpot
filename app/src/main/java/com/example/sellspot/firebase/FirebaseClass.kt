@@ -13,6 +13,7 @@ import com.example.sellspot.model.Product
 import com.example.sellspot.model.User
 import com.example.sellspot.ui.activities.ui.activities.*
 import com.example.sellspot.ui.activities.ui.fragments.DashboardFragment
+import com.example.sellspot.ui.activities.ui.fragments.OrdersFragment
 import com.example.sellspot.ui.activities.ui.fragments.ProductsFragment
 import com.example.sellspot.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -849,6 +850,41 @@ class FirebaseClass {
 
             Log.e(activity.javaClass.simpleName, "Error while updating all the details after order placed.", e)
         }
+    }
+
+    // TODO Step 5: Create a function to get the list of orders from cloud firestore.
+    // START
+    /**
+     * A function to get the list of orders from cloud firestore.
+     */
+    fun getMyOrdersList(fragment: OrdersFragment) {
+        mFireStore.collection(Constants.ORDERS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+                val list: ArrayList<Order> = ArrayList()
+
+                for (i in document.documents) {
+
+                    val orderItem = i.toObject(Order::class.java)!!
+                    orderItem.id = i.id
+
+                    list.add(orderItem)
+                }
+
+                // TODO Step 7: Notify the success result to base class.
+                // START
+                fragment.populateOrdersListInUI(list)
+                // END
+            }
+            .addOnFailureListener { e ->
+                // Here call a function of base activity for transferring the result to it.
+
+                fragment.hideProgressDialog()
+
+                Log.e(fragment.javaClass.simpleName, "Error while getting the orders list.", e)
+            }
     }
     // END
 }

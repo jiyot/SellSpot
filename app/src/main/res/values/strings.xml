@@ -53,8 +53,6 @@
     <string name="btn_lbl_save">Save</string>
     <!--END-->
 
-    <string name="title_edit_profile">EDIT PROFILE</string>
-
     <string name="read_storage_permission_denied">Oops, you just denied the permission for storage. You can also allow it from settings.</string>
 
     <string name="image_selection_failed">Image selection Failed!</string>
@@ -78,6 +76,8 @@
     <string name="lbl_edit">Edit</string>
     <string name="lbl_addresses">Addresses</string>
     <string name="btn_lbl_logout">Logout</string>
+
+    <string name="title_edit_profile">EDIT PROFILE</string>
 
     <string name="action_add_product">Add Product</string>
 
@@ -173,5 +173,8 @@
     <string name="lbl_cash_on_delivery">Cash On Delivery</string>
     <string name="btn_lbl_place_order">PLACE ORDER</string>
 
+    <!--TODO Step 3: Add the string resources to the string.xml file.-->
+    <!--START-->
+    <string name="no_orders_placed_yet">No orders placed yet!</string>
     <!--END-->
 </resources>

@@ -43,7 +43,7 @@ open class AddressListAdapter(
      * of the given type. You can either create a new View manually or inflate it from an XML
      * layout file.
      */
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SuspiciousIndentation")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
 
