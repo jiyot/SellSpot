@@ -1,5 +1,6 @@
 package com.example.sellspot.ui.activities.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -44,21 +45,18 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             productOwnerId =
                 intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
         }
-        // END
 
         setupActionBar()
 
         if (FirebaseClass().getCurrentUserID() == productOwnerId) {
             binding.btnAddToCart.visibility = View.GONE
+            binding.btnGoToCart.visibility = View.GONE
         } else {
             binding.btnAddToCart.visibility  = View.VISIBLE
         }
 
         binding.btnAddToCart.setOnClickListener(this)
-        // TODO Step 4: Assign a click even to the GoToCart button.
-        // START
-        binding.btnAddToCart.setOnClickListener(this)
-        // END
+        binding.btnGoToCart.setOnClickListener(this)
 
         getProductDetails()
     }
@@ -69,6 +67,10 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
                 R.id.btn_add_to_cart -> {
                     addToCart()
+                }
+
+                R.id.btn_go_to_cart->{
+                    startActivity(Intent(this@ProductDetailsActivity, CartListActivity::class.java))
                 }
             }
         }
@@ -131,12 +133,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
         mProductDetails = product
 
-        // TODO Step 10: Don't hide the progress dialog here. Please remove it from here. We have already taken care of it later.
-        // START
-        // Hide Progress dialog.
-        // hideProgressDialog()
-        // END
-
         // Populate the product details in the UI.
         GlideLoader(this@ProductDetailsActivity).loadProductPicture(
             product.image,
@@ -148,8 +144,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         binding.tvProductDetailsDescription.text = product.description
         binding.tvProductDetailsAvailableQuantity.text = product.stock_quantity
 
-        // TODO Step 9: Call the function to check the product exist in the cart or not from the firestore class.
-        // START
         // There is no need to check the cart list if the product owner himself is seeing the product details.
         if (FirebaseClass().getCurrentUserID() == product.user_id) {
             // Hide Progress dialog.
@@ -157,11 +151,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         } else {
             FirebaseClass().checkIfItemExistInCart(this@ProductDetailsActivity, mProductId)
         }
-        // END
     }
 
-    // TODO Step 7: Create a function to notify the success result of item exists in the cart.
-    // START
     /**
      * A function to notify the success result of item exists in the cart.
      */
@@ -173,9 +164,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         // Hide the AddToCart button if the item is already in the cart.
         binding.btnAddToCart.visibility = View.GONE
         // Show the GoToCart button if the item is already in the cart. User can update the quantity from the cart list screen if he wants.
-        binding.btnAddToCart.visibility = View.VISIBLE
+        binding.btnGoToCart.visibility = View.VISIBLE
     }
-    // END
 
     /**
      * A function to notify the success result of item added to the to cart.
@@ -190,7 +180,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             Toast.LENGTH_SHORT
         ).show()
 
-        // TODO Step 11: Change the buttons visibility once the item is added to the cart.
         // Hide the AddToCart button if the item is already in the cart.
         binding.btnAddToCart.visibility = View.GONE
         // Show the GoToCart button if the item is already in the cart. User can update the quantity from the cart list screen if he wants.

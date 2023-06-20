@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sellspot.databinding.ItemCartLayoutBinding
 import com.example.sellspot.model.Cart
-import com.myshoppal.ui.adapters.DashboardItemsListAdapter
 import com.myshoppal.utils.GlideLoader
-
 
 /**
  * A adapter class for dashboard items list.
@@ -24,9 +22,10 @@ open class CartItemsListAdapter(
     private val itemBinding get() = _itemBinding!!
 
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         _itemBinding = ItemCartLayoutBinding.inflate(LayoutInflater.from(context), parent, false)
-        return DashboardItemsListAdapter.MyViewHolder(itemBinding.root)
+        return MyViewHolder(itemBinding.root)
     }
 
 
@@ -37,7 +36,6 @@ open class CartItemsListAdapter(
         if (holder is MyViewHolder) {
 
             GlideLoader(context).loadProductPicture(model.image, itemBinding.ivCartItemImage)
-
 
             itemBinding.tvCartItemTitle.text = model.title
             itemBinding.tvCartItemPrice.text = "$${model.price}"

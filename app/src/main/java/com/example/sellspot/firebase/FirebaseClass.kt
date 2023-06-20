@@ -297,12 +297,11 @@ class FirebaseClass {
                         fragment.hideProgressDialog()
                     }
                 }
+
                 Log.e("Get Product List", "Error while getting product list.", e)
             }
     }
 
-    // TODO Step 1: Create a function to get all the product list from the cloud firestore.
-    // START
     /**
      * A function to get all the product list from the cloud firestore.
      *
@@ -329,10 +328,7 @@ class FirebaseClass {
                     productsList.add(product)
                 }
 
-                // TODO Step 3: Pass the success result of the product list to the cart list activity.
-                // START
                 activity.successProductsListFromFireStore(productsList)
-                // END
             }
             .addOnFailureListener { e ->
                 // Hide the progress dialog if there is any error based on the base class instance.
@@ -341,7 +337,6 @@ class FirebaseClass {
                 Log.e("Get Product List", "Error while getting all product list.", e)
             }
     }
-    // END
 
     /**
      * A function to get the dashboard items list. The list will be an overall items list, not based on the user's id.
@@ -459,8 +454,6 @@ class FirebaseClass {
             }
     }
 
-    // TODO Step 6: Create a function check whether the item already exist in the cart or not.
-    // START
     /**
      * A function to check whether the item already exist in the cart or not.
      */
@@ -474,15 +467,12 @@ class FirebaseClass {
 
                 Log.e(activity.javaClass.simpleName, document.documents.toString())
 
-                // TODO Step 8: Notify the success result to the base class.
-                // START
                 // If the document size is greater than 1 it means the product is already added to the cart.
                 if (document.documents.size > 0) {
                     activity.productExistsInCart()
                 } else {
                     activity.hideProgressDialog()
                 }
-                // END
             }
             .addOnFailureListener { e ->
                 // Hide the progress dialog if there is an error.
