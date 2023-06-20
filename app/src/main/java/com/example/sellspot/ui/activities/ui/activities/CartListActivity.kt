@@ -2,6 +2,7 @@ package com.example.sellspot.ui.activities.ui.activities
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityCartListBinding
@@ -90,12 +91,6 @@ class CartListActivity : BaseActivity() {
      */
     private fun getCartItemsList() {
 
-        // TODO Step 2: Comment the show progress dialog as it is already displayed in the getProductList function.
-        // START
-        // Show the progress dialog.
-        // showProgressDialog(resources.getString(R.string.please_wait))
-        // END
-
         FirebaseClass().getCartList(this@CartListActivity)
     }
 
@@ -109,8 +104,6 @@ class CartListActivity : BaseActivity() {
         // Hide progress dialog.
         hideProgressDialog()
 
-        // TODO Step 3: Compare the product id of product list with product id of cart items list and update the stock quantity in the cart items list from the latest product list.
-        // START
         for (product in mProductsList) {
             for (cart in cartList) {
                 if (product.product_id == cart.product_id) {
@@ -123,14 +116,9 @@ class CartListActivity : BaseActivity() {
                 }
             }
         }
-        // END
 
-        // TODO Step 5: Initialize the global variable of cart list items.
-        // START
         mCartListItems = cartList
-        // END
 
-        // TODO Step 6: Now onwards use the global variable of the cart list items as mCartListItems instead of cartList.
         if (mCartListItems.size > 0) {
 
             binding.rvCartItemsList.visibility = View.VISIBLE
@@ -147,8 +135,6 @@ class CartListActivity : BaseActivity() {
 
             for (item in mCartListItems) {
 
-                // TODO Step 7: Calculate the subtotal based on the stock quantity.
-                // START
                 val availableQuantity = item.stock_quantity.toInt()
 
                 if (availableQuantity > 0) {
@@ -157,7 +143,6 @@ class CartListActivity : BaseActivity() {
 
                     subTotal += (price * quantity)
                 }
-                // END
             }
 
             binding.tvSubTotal.text = "$$subTotal"
@@ -178,6 +163,34 @@ class CartListActivity : BaseActivity() {
             binding.llCheckout.visibility = View.GONE
             binding.tvNoCartItemFound.visibility = View.VISIBLE
         }
+    }
+
+    /**
+     * A function to notify the user about the item removed from the cart list.
+     */
+    fun itemRemovedSuccess() {
+
+        hideProgressDialog()
+
+        Toast.makeText(
+            this@CartListActivity,
+            resources.getString(R.string.msg_item_removed_successfully),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        getCartItemsList()
+    }
+
+    // TODO Step 3: Create a function to notify the user about the item quantity updated in the cart list.
+    // START
+    /**
+     * A function to notify the user about the item quantity updated in the cart list.
+     */
+    fun itemUpdateSuccess() {
+
+        hideProgressDialog()
+
+        getCartItemsList()
     }
     // END
 }
