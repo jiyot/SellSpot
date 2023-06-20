@@ -233,6 +233,28 @@ class CheckoutActivity : BaseActivity() {
      */
     fun orderPlacedSuccess() {
 
+//        hideProgressDialog()
+//
+//        Toast.makeText(this@CheckoutActivity, "Your order placed successfully.", Toast.LENGTH_SHORT)
+//            .show()
+//
+//        val intent = Intent(this@CheckoutActivity, DashboardActivity::class.java)
+//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        startActivity(intent)
+//        finish()
+        FirebaseClass().updateAllDetails(this@CheckoutActivity, mCartItemsList)
+    }
+
+    // TODO Step 3: Create a function to notify the success result after updating all the required details.
+    // START
+    /**
+     * A function to notify the success result after updating all the required details.
+     */
+    fun allDetailsUpdatedSuccessfully() {
+
+        // TODO Step 6: Move the piece of code from OrderPlaceSuccess to here.
+        // START
+        // Hide the progress dialog.
         hideProgressDialog()
 
         Toast.makeText(this@CheckoutActivity, "Your order placed successfully.", Toast.LENGTH_SHORT)
@@ -242,6 +264,6 @@ class CheckoutActivity : BaseActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
+        // END
     }
-    // END
 }

@@ -70,6 +70,11 @@ object Constants {
 
     const val CART_QUANTITY: String = "cart_quantity"
 
+    // TODO Step 1: A constant for Stock Quantity.
+    // START
+    const val STOCK_QUANTITY: String = "stock_quantity"
+    // END
+
     const val HOME: String = "Home"
     const val OFFICE: String = "Office"
     const val OTHER: String = "Other"

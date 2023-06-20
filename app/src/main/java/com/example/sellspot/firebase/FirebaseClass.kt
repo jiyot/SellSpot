@@ -801,5 +801,54 @@ class FirebaseClass {
                 )
             }
     }
+
+    // TODO Step 2: Create a function to update all the required details in the cloud firestore after placing the order successfully.
+    // START
+    /**
+     * A function to update all the required details in the cloud firestore after placing the order successfully.
+     *
+     * @param activity Base class.
+     * @param cartList List of cart items.
+     */
+    fun updateAllDetails(activity: CheckoutActivity, cartList: ArrayList<Cart>) {
+
+        val writeBatch = mFireStore.batch()
+
+        // Here we will update the product stock in the products collection based to cart quantity.
+        for (cart in cartList) {
+
+            val productHashMap = HashMap<String, Any>()
+
+            productHashMap[Constants.STOCK_QUANTITY] =
+                (cart.stock_quantity.toInt() - cart.cart_quantity.toInt()).toString()
+
+            val documentReference = mFireStore.collection(Constants.PRODUCTS)
+                .document(cart.product_id)
+
+            writeBatch.update(documentReference, productHashMap)
+        }
+
+        // Delete the list of cart items
+        for (cart in cartList) {
+
+            val documentReference = mFireStore.collection(Constants.CART_ITEMS)
+                .document(cart.id)
+            writeBatch.delete(documentReference)
+        }
+
+        writeBatch.commit().addOnSuccessListener {
+
+            // TODO Step 4: Finally after performing all the operation notify the user with the success result.
+            // START
+            activity.allDetailsUpdatedSuccessfully()
+            // END
+
+        }.addOnFailureListener { e ->
+            // Here call a function of base activity for transferring the result to it.
+            activity.hideProgressDialog()
+
+            Log.e(activity.javaClass.simpleName, "Error while updating all the details after order placed.", e)
+        }
+    }
     // END
 }
