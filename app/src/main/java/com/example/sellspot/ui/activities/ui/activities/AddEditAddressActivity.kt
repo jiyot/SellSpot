@@ -37,11 +37,25 @@ class AddEditAddressActivity : BaseActivity() {
 
 
         setupActionBar()
-        // END
 
+        if (mAddressDetails != null) {
+            if (mAddressDetails!!.id.isNotEmpty()) {
+                when (mAddressDetails?.type) {
+                    Constants.HOME -> {
+                        binding.rbHome.isChecked = true
+                    }
+                    Constants.OFFICE -> {
+                        binding.rbOffice.isChecked = true
+                    }
+                    else -> {
+                        binding.rbOther.isChecked = true
+                        binding.tilOtherDetails.visibility = View.VISIBLE
+                        binding.etOtherDetails.setText(mAddressDetails?.otherDetails)
+                    }
+                }
+            }
+        }
 
-        // TODO Step 8: Assign the checked change listener on click of radio buttons for the address type.
-        //START
         binding.rgType.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == R.id.rb_other) {
                 binding.tilOtherDetails.visibility = View.VISIBLE
@@ -49,6 +63,7 @@ class AddEditAddressActivity : BaseActivity() {
                 binding.tilOtherDetails.visibility = View.GONE
             }
         }
+
         // END
 
         // TODO Step 7: Assign the on click event of submit button and save the address.
@@ -158,13 +173,18 @@ class AddEditAddressActivity : BaseActivity() {
                 otherDetails
             )
 
-
-            // TODO Step 6: Call the function to save the address.
-            // START
-            FirebaseClass().addAddress(this@AddEditAddressActivity, addressModel)
-            // END
+            if (mAddressDetails != null && mAddressDetails!!.id.isNotEmpty()) {
+                FirebaseClass().updateAddress(
+                    this@AddEditAddressActivity,
+                    addressModel,
+                    mAddressDetails!!.id
+                )
+            } else {
+                FirebaseClass().addAddress(this@AddEditAddressActivity, addressModel)
+            }
         }
     }
+
     /**
      * A function to notify the success result of address saved.
      */
@@ -173,12 +193,20 @@ class AddEditAddressActivity : BaseActivity() {
         // Hide progress dialog
         hideProgressDialog()
 
+        val notifySuccessMessage: String = if (mAddressDetails != null && mAddressDetails!!.id.isNotEmpty()) {
+            resources.getString(R.string.msg_your_address_updated_successfully)
+        } else {
+            resources.getString(R.string.err_your_address_added_successfully)
+        }
+
         Toast.makeText(
             this@AddEditAddressActivity,
             resources.getString(R.string.err_your_address_added_successfully),
             Toast.LENGTH_SHORT
         ).show()
 
+        // TODO Step 13: Now se the result to OK.
+        setResult(RESULT_OK)
         finish()
     }
     // END

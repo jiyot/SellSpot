@@ -151,4 +151,15 @@
     <!--TODO Step 4: Add the string resources file to the strings.xml file.-->
     <!--START-->
     <string name="err_your_address_added_successfully">Your address is added successfully.</string>
+
+
+    <string name="title_edit_address">EDIT ADDRESS</string>
+    <string name="btn_lbl_update">UPDATE</string>
+    <string name="msg_your_address_updated_successfully">Your address is updated successfully.</string>
+
+    <string name="err_your_address_deleted_successfully">Your address is deleted successfully.</string>
+
+    <!--TODO Step 6: Add the string resources to the strings.xml file-->
+    <!--START-->
+    <string name="title_select_address">SELECT ADDRESS</string>
 </resources>

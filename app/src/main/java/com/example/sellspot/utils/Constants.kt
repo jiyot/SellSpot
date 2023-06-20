@@ -26,6 +26,10 @@ object Constants {
     // TODO Step 5: Add a constant value to pass the address details through intent.
     // START
     const val EXTRA_ADDRESS_DETAILS: String = "AddressDetails"
+
+    // TODO Step 1: Declare a constant to pass the value through intent in the address listing screen which will help to select the address to proceed with checkout.
+    // START
+    const val EXTRA_SELECT_ADDRESS: String = "extra_select_address"
     // END
 
 
@@ -34,6 +38,12 @@ object Constants {
 
     // A unique code of image selection from Phone Storage.
     const val PICK_IMAGE_REQUEST_CODE = 2
+
+
+    // TODO Step 11: Declare a global constant variable to notify the add address.
+    // START
+    const val ADD_ADDRESS_REQUEST_CODE: Int = 121
+    // END
 
     // Constant variables for Gender
     const val MALE: String = "Male"

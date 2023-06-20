@@ -7,6 +7,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sellspot.databinding.ItemAddressLayoutBinding
 import com.example.sellspot.model.Address
@@ -18,7 +19,8 @@ import com.example.sellspot.utils.Constants
  */
 open class AddressListAdapter(
     private val context: Context,
-    private var list: ArrayList<Address>
+    private var list: ArrayList<Address>,
+    private val selectAddress: Boolean
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var _itemBinding: ItemAddressLayoutBinding? = null
@@ -45,10 +47,24 @@ open class AddressListAdapter(
         val model = list[position]
 
         // Access the views through binding
+        if (holder is MyViewHolder) {
         itemBinding.tvAddressFullName.text = model.name
         itemBinding.tvAddressType.text = model.type
         itemBinding.tvAddressDetails.text = "${model.address}, ${model.zipCode}"
         itemBinding.tvAddressMobileNumber.text = model.mobileNumber
+
+            // START
+            if (selectAddress) {
+                holder.itemView.setOnClickListener {
+                    Toast.makeText(
+                        context,
+                        "Selected address : ${model.address}, ${model.zipCode}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            // END
+        }
     }
 
     /**
@@ -70,6 +86,12 @@ open class AddressListAdapter(
         // TODO Step 6: Pass the address details through intent to edit the address.
         // START
         intent.putExtra(Constants.EXTRA_ADDRESS_DETAILS, list[position])
+
+        // TODO Step 15: Make it startActivityForResult instead of startActivity.
+        // START
+        // activity.startActivity (intent)
+
+        activity.startActivityForResult(intent, Constants.ADD_ADDRESS_REQUEST_CODE)
         // END
         activity.startActivity(intent)
 

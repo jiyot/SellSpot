@@ -1,9 +1,11 @@
 package com.example.sellspot.ui.activities.ui.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +14,10 @@ import com.example.sellspot.databinding.ActivityAddressListBinding
 import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.Address
 import com.example.sellspot.ui.activities.ui.adapters.AddressListAdapter
+import com.example.sellspot.utils.Constants
+import com.example.sellspot.utils.SwipeToDeleteCallback
 import com.example.sellspot.utils.SwipeToEditCallback
+
 
 
 /**
@@ -21,13 +26,12 @@ import com.example.sellspot.utils.SwipeToEditCallback
 class AddressListActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAddressListBinding
-
+    private var mSelectAddress: Boolean = false
     /**
      * This function is auto created by Android when the Activity Class is created.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-        // This call the parent constructor
-        // Initialize the binding
+
         binding = ActivityAddressListBinding.inflate(layoutInflater)
         val view = binding.root
         super.onCreate(savedInstanceState)
@@ -35,18 +39,61 @@ class AddressListActivity : BaseActivity() {
 
 
         setContentView(view)
+        
+
+        // TODO Step 4: Receive the value and initialize the variable to select the address.
+        // START
+        if (intent.hasExtra(Constants.EXTRA_SELECT_ADDRESS)) {
+            mSelectAddress =
+                intent.getBooleanExtra(Constants.EXTRA_SELECT_ADDRESS, false)
+        }
+        // END
 
         setupActionBar()
+        if (mSelectAddress) {
+            binding.tvTitle.text = resources.getString(R.string.title_select_address)
+        }
+        //
 
-        // TODO Step 8: Assign the click event for the Add Address and launch the AddEditAddressActivity.
+        // TODO Step 5: If it is about to select the address then update the title.
         // START
         binding.tvAddAddress.setOnClickListener {
             val intent = Intent(this@AddressListActivity, AddEditAddressActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, Constants.ADD_ADDRESS_REQUEST_CODE)
         }
 
         getAddressList()
     }
+
+    // TODO Step 14: Override the onActivityResult function and get the latest address list based on the result code.
+    // START
+    /**
+     * Receive the result from a previous call to
+     * {@link #startActivityForResult(Intent, int)}.  This follows the
+     * related Activity API as described there in
+     * {@link Activity#onActivityResult(int, int, Intent)}.
+     *
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     */
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == Constants.ADD_ADDRESS_REQUEST_CODE) {
+
+                getAddressList()
+            }
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            // A log is printed when user close or cancel the image selection.
+            Log.e("Request Cancelled", "To add the address.")
+        }
+    }
+    // END
 
     /**
      * A function for actionBar Setup.
@@ -102,30 +149,61 @@ class AddressListActivity : BaseActivity() {
             binding.rvAddressList.layoutManager = LinearLayoutManager(this@AddressListActivity)
             binding.rvAddressList.setHasFixedSize(true)
 
-            val addressAdapter = AddressListAdapter(this@AddressListActivity, addressList)
+            val addressAdapter = AddressListAdapter(this@AddressListActivity,  addressList, mSelectAddress)
             binding.rvAddressList.adapter = addressAdapter
 
             // TODO Step 3: Add the swipe to edit feature.
             // START
-            val editSwipeHandler = object : SwipeToEditCallback(this) {
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            if (!mSelectAddress) {
+                val editSwipeHandler = object : SwipeToEditCallback(this) {
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                    // TODO Step 7: Call the notifyEditItem function of the adapter class.
-                    // START
-                    val adapter = binding.rvAddressList.adapter as AddressListAdapter
-                    adapter.notifyEditItem(
-                        this@AddressListActivity,
-                        viewHolder.adapterPosition
-                    )
-                    // END
+                        val adapter = binding.rvAddressList.adapter as AddressListAdapter
+                        adapter.notifyEditItem(
+                            this@AddressListActivity,
+                            viewHolder.adapterPosition
+                        )
+                    }
                 }
+                val editItemTouchHelper = ItemTouchHelper(editSwipeHandler)
+                editItemTouchHelper.attachToRecyclerView(binding.rvAddressList)
+
+
+                val deleteSwipeHandler = object : SwipeToDeleteCallback(this) {
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                        // Show the progress dialog.
+                        showProgressDialog(resources.getString(R.string.please_wait))
+
+                        FirebaseClass().deleteAddress(
+                            this@AddressListActivity,
+                            addressList[viewHolder.adapterPosition].id
+                        )
+                    }
+                }
+                val deleteItemTouchHelper = ItemTouchHelper(deleteSwipeHandler)
+                deleteItemTouchHelper.attachToRecyclerView(binding.rvAddressList)
             }
-            val editItemTouchHelper = ItemTouchHelper(editSwipeHandler)
-            editItemTouchHelper.attachToRecyclerView(binding.rvAddressList)
-            // END
         } else {
             binding.rvAddressList .visibility = View.GONE
             binding.tvNoAddressFound.visibility = View.VISIBLE
         }
+    }
+
+    /**
+     * A function notify the user that the address is deleted successfully.
+     */
+    fun deleteAddressSuccess() {
+
+        // Hide progress dialog.
+        hideProgressDialog()
+
+        Toast.makeText(
+            this@AddressListActivity,
+            resources.getString(R.string.err_your_address_deleted_successfully),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        getAddressList()
     }
 }
