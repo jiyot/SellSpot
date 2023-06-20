@@ -16,7 +16,7 @@ import com.example.sellspot.utils.Constants
 class AddEditAddressActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAddEditAddressBinding
-
+    private var mAddressDetails: Address? = null
     /**
      * This function is auto created by Android when the Activity Class is created.
      */
@@ -29,8 +29,13 @@ class AddEditAddressActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
-        // TODO Step 7: Call the setup action bar function.
-        // START
+
+        if (intent.hasExtra(Constants.EXTRA_ADDRESS_DETAILS)) {
+            mAddressDetails =
+                intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)!!
+        }
+
+
         setupActionBar()
         // END
 
