@@ -191,5 +191,12 @@
     <!--START-->
     <string name="order_status_in_process">In Process</string>
     <string name="order_status_delivered">Delivered</string>
+
+    <!--TODO Step 5: Add the string resources in the strings.xml file-->
+    <!--START-->
+    <string name="title_sold_products">Sold Products</string>
+    <string name="no_products_sold_out_yet">No products sold out yet!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--END-->
 </resources>

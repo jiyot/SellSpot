@@ -36,7 +36,8 @@ class DashboardActivity : BaseActivity() {
             setOf(
                 R.id.navigation_products,
                 R.id.navigation_dashboard,
-                R.id.navigation_orders
+                R.id.navigation_orders,
+                R.id.navigation_sold_products
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

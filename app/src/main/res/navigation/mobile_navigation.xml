@@ -22,4 +22,13 @@
         android:name="com.example.sellspot.ui.activities.ui.fragments.OrdersFragment"
         android:label="@string/title_orders"
         tools:layout="@layout/fragment_orders" />
+
+    <!--TODO Step 6: Add the Products Fragment in the navigation view.-->
+    <!--START-->
+    <fragment
+        android:id="@+id/navigation_sold_products"
+        android:name="com.example.sellspot.ui.activities.ui.fragments.SoldProductsFragment"
+        android:label="@string/title_sold_products"
+        tools:layout="@layout/fragment_sold_products" />
+    <!--END-->
 </navigation>
