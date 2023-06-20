@@ -3,19 +3,28 @@ package com.example.sellspot.utils
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.AppCompatEditText
 
-class SSEditText (context: Context, attributesSet: AttributeSet): AppCompatTextView(context, attributesSet){
+/**
+ * This class will be used for Custom font text using the EditText which inherits the AppCompatEditText class.
+ */
+class SSEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(context, attrs) {
 
+    /**
+     * The init block runs every time the class is instantiated.
+     */
     init {
-
+        // Call the function to apply the font to the components.
         applyFont()
-
     }
 
-    private fun applyFont(){
-
-        val boldTypeface: Typeface = Typeface.createFromAsset(context.assets, "Montserrat-Bold.ttf")
-        setTypeface(boldTypeface)
+    /**
+     * Applies a font to a EditText.
+     */
+    private fun applyFont() {
+        // This is used to get the file from the assets folder and set it to the title textView.
+        val typeface: Typeface =
+            Typeface.createFromAsset(context.assets, "Montserrat-Regular.ttf")
+        setTypeface(typeface)
     }
 }

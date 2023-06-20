@@ -64,6 +64,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".ui.activities.ui.activities.AddressListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <activity
+            android:name=".ui.activities.ui.activities.AddEditAddressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ui.activities.ui.activities.SpllashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
