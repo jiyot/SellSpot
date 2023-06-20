@@ -12,7 +12,7 @@ import com.example.sellspot.model.Product
 import com.example.sellspot.ui.activities.ui.adapters.CartItemsListAdapter
 
 
-// TODO Step 1: Create an CartListActivity.
+
 // START
 /**
  * Cart list activity of the application.
