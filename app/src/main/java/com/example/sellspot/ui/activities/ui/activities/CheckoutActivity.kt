@@ -1,7 +1,6 @@
 package com.example.sellspot.ui.activities.ui.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -34,6 +33,11 @@ class CheckoutActivity : BaseActivity() {
 
     // A global variable for the Total Amount.
     private var mTotalAmount: Double = 0.0
+
+    // TODO Step 6: Create a global variable for Order details.
+    // START
+    // A global variable for Order details.
+    private lateinit var mOrderDetails: Order
     // END
 
     private lateinit var binding: ActivityCheckoutBinding
@@ -212,12 +216,13 @@ class CheckoutActivity : BaseActivity() {
             mSubTotal.toString(),
             "10.0", // The Shipping Charge is fixed as $10 for now in our case.
             mTotalAmount.toString(),
+            System.currentTimeMillis()
         )
         // END
 
         // TODO Step 10: Call the function to place the order in the cloud firestore.
         // START
-        FirebaseClass().placeOrder(this@CheckoutActivity, order)
+        FirebaseClass().placeOrder(this@CheckoutActivity, mOrderDetails)
         // END
     }
     // END
@@ -239,7 +244,7 @@ class CheckoutActivity : BaseActivity() {
 //        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 //        startActivity(intent)
 //        finish()
-        FirebaseClass().updateAllDetails(this@CheckoutActivity, mCartItemsList)
+        FirebaseClass().updateAllDetails(this@CheckoutActivity, mCartItemsList, mOrderDetails)
     }
 
     // TODO Step 3: Create a function to notify the success result after updating all the required details.

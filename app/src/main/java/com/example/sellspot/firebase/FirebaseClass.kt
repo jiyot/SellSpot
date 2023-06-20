@@ -10,6 +10,7 @@ import com.example.sellspot.model.Address
 import com.example.sellspot.model.Cart
 import com.example.sellspot.model.Order
 import com.example.sellspot.model.Product
+import com.example.sellspot.model.SoldProduct
 import com.example.sellspot.model.User
 import com.example.sellspot.ui.activities.ui.activities.*
 import com.example.sellspot.ui.activities.ui.fragments.DashboardFragment
@@ -811,9 +812,39 @@ class FirebaseClass {
      * @param activity Base class.
      * @param cartList List of cart items.
      */
-    fun updateAllDetails(activity: CheckoutActivity, cartList: ArrayList<Cart>) {
+    fun updateAllDetails(activity: CheckoutActivity, cartList: ArrayList<Cart>, order: Order) {
+        // END
 
         val writeBatch = mFireStore.batch()
+
+        // TODO Step 10: Prepare the sold product details
+        // START
+        // Prepare the sold product details
+        for (cart in cartList) {
+
+            val soldProduct = SoldProduct(
+                // Here the user id will be of product owner.
+                cart.product_owner_id,
+                cart.title,
+                cart.price,
+                cart.cart_quantity,
+                cart.image,
+                order.title,
+                order.order_datetime,
+                order.sub_total_amount,
+                order.shipping_charge,
+                order.total_amount,
+                order.address
+            )
+
+            // TODO Step 12: Make an entry for sold product in cloud firestore.
+            // START
+            val documentReference = mFireStore.collection(Constants.SOLD_PRODUCTS)
+                .document()
+            writeBatch.set(documentReference, soldProduct)
+            // END
+        }
+        // END
 
         // Here we will update the product stock in the products collection based to cart quantity.
         for (cart in cartList) {

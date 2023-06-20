@@ -19,6 +19,7 @@ import com.myshoppal.utils.GlideLoader
 class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var mProductDetails: Product
+    private var mProductOwnerId: String = ""
 
     // A global variable for product id.
     private var mProductId: String = ""
@@ -83,6 +84,9 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
         val addToCart = Cart(
             FirebaseClass().getCurrentUserID(),
+            // TODO Step 4: Pass the required param here.
+            // START
+            mProductOwnerId,
             mProductId,
             mProductDetails.title,
             mProductDetails.price,
