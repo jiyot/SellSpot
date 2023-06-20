@@ -308,7 +308,7 @@ class FirebaseClass {
      *
      * @param activity The activity is passed as parameter to the function because it is called from activity and need to the success result.
      */
-    fun getAllProductsList(activity: CartListActivity) {
+    fun getAllProductsList(activity: Activity) {
         // The collection name for PRODUCTS
         mFireStore.collection(Constants.PRODUCTS)
             .get() // Will get the documents snapshots.
@@ -329,11 +329,31 @@ class FirebaseClass {
                     productsList.add(product)
                 }
 
-                activity.successProductsListFromFireStore(productsList)
+                when (activity) {
+                    is CartListActivity -> {
+                        activity.successProductsListFromFireStore(productsList)
+                    }
+
+                    // TODO Step 5: Notify the success result to the base class.
+                    // START
+                    is CheckoutActivity -> {
+                        activity.successProductsListFromFireStore(productsList)
+                    }
+                    // END
+                }
             }
             .addOnFailureListener { e ->
                 // Hide the progress dialog if there is any error based on the base class instance.
-                activity.hideProgressDialog()
+                when (activity) {
+                    is CartListActivity -> {
+                        activity.hideProgressDialog()
+                    }
+
+                    // TODO Step 6: Hide the progress dialog.
+                    is CheckoutActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
 
                 Log.e("Get Product List", "Error while getting all product list.", e)
             }
@@ -518,6 +538,13 @@ class FirebaseClass {
                     is CartListActivity -> {
                         activity.successCartItemsList(list)
                     }
+
+                    // TODO Step 14: Notify the success result of latest cart items list to checkout screen.
+                    // START
+                    is CheckoutActivity -> {
+                        activity.successCartItemsList(list)
+                    }
+                    // END
                 }
             }
             .addOnFailureListener { e ->
@@ -526,6 +553,13 @@ class FirebaseClass {
                     is CartListActivity -> {
                         activity.hideProgressDialog()
                     }
+
+                    // TODO Step 15:  Hide the progress dialog if there is an error based on the activity instance.
+                    // START
+                    is CheckoutActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    // END
                 }
 
                 Log.e(activity.javaClass.simpleName, "Error while getting the cart list items.", e)
