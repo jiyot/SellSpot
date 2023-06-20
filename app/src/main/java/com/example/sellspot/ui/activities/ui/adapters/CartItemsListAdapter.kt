@@ -51,6 +51,12 @@ open class CartItemsListAdapter(
                 itemBinding.ibRemoveCartItem.visibility = View.GONE
                 itemBinding.ibAddCartItem.visibility = View.GONE
 
+                if (updateCartItems) {
+                    itemBinding.ibDeleteCartItem.visibility = View.VISIBLE
+                } else {
+                    itemBinding.ibDeleteCartItem.visibility  = View.GONE
+                }
+
                 itemBinding.tvCartQuantity.text = context.resources.getString(R.string.lbl_out_of_stock)
                 itemBinding.tvCartQuantity.setTextColor(
                     ContextCompat.getColor(

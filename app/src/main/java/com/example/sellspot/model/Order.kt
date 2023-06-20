@@ -19,6 +19,9 @@ data class Order(
     val sub_total_amount: String = "",
     val shipping_charge: String = "",
     val total_amount: String = "",
+
+    val order_datetime: Long = 0L,
+    // END
     var id: String = ""
 ) : Parcelable
 // END

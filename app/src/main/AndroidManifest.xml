@@ -15,10 +15,15 @@
         android:theme="@style/Theme.SellSpot"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.ui.activities.MyOrderDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ui.activities.ui.activities.CheckoutActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activities.ui.activities.ProductDetailsActivity"
             android:exported="false"
