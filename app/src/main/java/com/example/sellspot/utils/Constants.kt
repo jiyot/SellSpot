@@ -28,9 +28,11 @@ object Constants {
     const val EXTRA_SELECT_ADDRESS: String = "extra_select_address"
     const val EXTRA_SELECTED_ADDRESS: String = "extra_selected_address"
 
+
     // TODO Step 6: Add a constant for passing the order details through intent.
     // START
     const val EXTRA_MY_ORDER_DETAILS: String = "extra_MY_ORDER_DETAILS"
+    const val EXTRA_SOLD_PRODUCT_DETAILS: String = "extra_sold_product_details"
     // END
 
 
