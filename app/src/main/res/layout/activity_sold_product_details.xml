@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.ui.activities.SoldProductDetailsActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_sold_product_details_activity"
         android:layout_width="match_parent"
@@ -79,7 +80,7 @@
                         android:textSize="@dimen/sold_details_label_value_textSize" />
 
                     <com.sellspot.utils.SSTextView
-                        android:id="@+id/tv_order_details_id"
+                        android:id="@+id/tv_sold_product_details_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -102,7 +103,7 @@
                         android:textSize="@dimen/sold_details_label_value_textSize" />
 
                     <com.sellspot.utils.SSTextView
-                        android:id="@+id/tv_order_details_date"
+                        android:id="@+id/tv_sold_product_details_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -135,7 +136,8 @@
                 android:paddingStart="@dimen/sold_details_content_paddingStartEnd"
                 android:paddingTop="@dimen/sold_details_content_paddingTopBottom"
                 android:paddingEnd="@dimen/sold_details_content_paddingStartEnd"
-                android:paddingBottom="@dimen/sold_details_content_paddingTopBottom">
+                android:paddingBottom="@dimen/sold_details_content_paddingTopBottom"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -178,6 +180,20 @@
                         android:textStyle="bold"
                         tools:text="$100.00" />
                 </LinearLayout>
+
+                <com.sellspot.utils.SSTextView
+                    android:id="@+id/tv_sold_product_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/item_grey_border_background"
+                    android:paddingStart="@dimen/cart_quantity_paddingStartEnd"
+                    android:paddingTop="@dimen/cart_quantity_paddingTopBottom"
+                    android:paddingEnd="@dimen/cart_quantity_paddingStartEnd"
+                    android:paddingBottom="@dimen/cart_quantity_paddingTopBottom"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/cart_quantity_textSize"
+                    android:textStyle="bold"
+                    tools:text="1" />
             </LinearLayout>
 
 

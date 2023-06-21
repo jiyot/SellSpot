@@ -22,4 +22,3 @@ data class SoldProduct(
     val address: Address = Address(),
     var id: String = "",
 ) : Parcelable
-// END
