@@ -16,6 +16,7 @@ import com.example.sellspot.ui.activities.ui.activities.*
 import com.example.sellspot.ui.activities.ui.fragments.DashboardFragment
 import com.example.sellspot.ui.activities.ui.fragments.OrdersFragment
 import com.example.sellspot.ui.activities.ui.fragments.ProductsFragment
+import com.example.sellspot.ui.activities.ui.fragments.SoldProductsFragment
 import com.example.sellspot.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -823,8 +824,7 @@ class FirebaseClass {
         for (cart in cartList) {
 
             val soldProduct = SoldProduct(
-                // Here the user id will be of product owner.
-                cart.product_owner_id,
+                FirebaseClass().getCurrentUserID(),
                 cart.title,
                 cart.price,
                 cart.cart_quantity,
@@ -915,6 +915,51 @@ class FirebaseClass {
                 fragment.hideProgressDialog()
 
                 Log.e(fragment.javaClass.simpleName, "Error while getting the orders list.", e)
+            }
+    }
+
+    // TODO Step 1: Create a function to get the list of sold products.
+    // START
+    /**
+     * A function to get the list of sold products from the cloud firestore.
+     *
+     *  @param fragment Base class
+     */
+    fun getSoldProductsList(fragment: SoldProductsFragment) {
+        // The collection name for SOLD PRODUCTS
+        mFireStore.collection(Constants.SOLD_PRODUCTS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+                // Here we get the list of sold products in the form of documents.
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+
+                // Here we have created a new instance for Sold Products ArrayList.
+                val list: ArrayList<SoldProduct> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Sold Products ArrayList.
+                for (i in document.documents) {
+
+                    val soldProduct = i.toObject(SoldProduct::class.java)!!
+                    soldProduct.id = i.id
+
+                    list.add(soldProduct)
+                }
+
+                // TODO Step 3: Notify the success result to the base class.
+                // START
+                fragment.successSoldProductsList(list)
+                // END
+            }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is any error.
+                fragment.hideProgressDialog()
+
+                Log.e(
+                    fragment.javaClass.simpleName,
+                    "Error while getting the list of sold products.",
+                    e
+                )
             }
     }
     // END

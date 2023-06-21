@@ -205,9 +205,7 @@ class CheckoutActivity : BaseActivity() {
         // Show the progress dialog.
         showProgressDialog(resources.getString(R.string.please_wait))
 
-        // TODO Step 5: Now prepare the order details based on all the required details.
-        // START
-        val order = Order(
+        mOrderDetails = Order(
             FirebaseClass().getCurrentUserID(),
             mCartItemsList,
             mAddressDetails!!,

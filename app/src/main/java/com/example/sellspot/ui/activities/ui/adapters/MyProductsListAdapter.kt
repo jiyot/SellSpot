@@ -1,5 +1,6 @@
 package com.myshoppal.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -27,6 +28,7 @@ open class MyProductsListAdapter(
         return MyViewHolder(itemBinding.root)
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
 
