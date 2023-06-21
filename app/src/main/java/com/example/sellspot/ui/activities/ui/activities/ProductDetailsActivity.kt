@@ -84,8 +84,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
         val addToCart = Cart(
             FirebaseClass().getCurrentUserID(),
-            // TODO Step 4: Pass the required param here.
-            // START
             mProductOwnerId,
             mProductId,
             mProductDetails.title,

@@ -6,12 +6,7 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
-import com.example.sellspot.model.Address
-import com.example.sellspot.model.Cart
-import com.example.sellspot.model.Order
-import com.example.sellspot.model.Product
-import com.example.sellspot.model.SoldProduct
-import com.example.sellspot.model.User
+import com.example.sellspot.model.*
 import com.example.sellspot.ui.activities.ui.activities.*
 import com.example.sellspot.ui.activities.ui.fragments.DashboardFragment
 import com.example.sellspot.ui.activities.ui.fragments.OrdersFragment
@@ -824,7 +819,7 @@ class FirebaseClass {
         for (cart in cartList) {
 
             val soldProduct = SoldProduct(
-                FirebaseClass().getCurrentUserID(),
+                cart.product_owner_id,
                 cart.title,
                 cart.price,
                 cart.cart_quantity,
