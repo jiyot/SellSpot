@@ -11,7 +11,7 @@ data class Cart(
     val user_id: String = "",
 
     val product_owner_id: String = "",
-    // END
+
     val product_id: String = "",
     val title: String = "",
     val price: String = "",
