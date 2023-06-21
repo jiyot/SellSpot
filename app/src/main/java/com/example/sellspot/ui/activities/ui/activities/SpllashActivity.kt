@@ -6,6 +6,7 @@ import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sellspot.R
+import com.google.firebase.FirebaseApp
 
 
 class SpllashActivity : AppCompatActivity() {
@@ -17,6 +18,9 @@ class SpllashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+
+        FirebaseApp.initializeApp(this)
+
 
         Handler().postDelayed(
             {
