@@ -35,11 +35,20 @@ class AddEditAddressActivity : BaseActivity() {
                 intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)!!
         }
 
-
         setupActionBar()
 
         if (mAddressDetails != null) {
             if (mAddressDetails!!.id.isNotEmpty()) {
+
+                binding.tvTitle.text = resources.getString(R.string.title_edit_address)
+                binding.btnSubmitAddress.text = resources.getString(R.string.btn_lbl_update)
+
+                binding.etFullName.setText(mAddressDetails?.name)
+                binding.etPhoneNumber.setText(mAddressDetails?.mobileNumber)
+                binding.etAddress.setText(mAddressDetails?.address)
+                binding.etZipCode.setText(mAddressDetails?.zipCode)
+                binding.etAdditionalNote.setText(mAddressDetails?.additionalNote)
+
                 when (mAddressDetails?.type) {
                     Constants.HOME -> {
                         binding.rbHome.isChecked = true
@@ -64,9 +73,6 @@ class AddEditAddressActivity : BaseActivity() {
             }
         }
 
-        // END
-
-        // TODO Step 7: Assign the on click event of submit button and save the address.
         binding.btnSubmitAddress.setOnClickListener {
             saveAddressToFirestore()
         }
@@ -201,7 +207,7 @@ class AddEditAddressActivity : BaseActivity() {
 
         Toast.makeText(
             this@AddEditAddressActivity,
-            resources.getString(R.string.err_your_address_added_successfully),
+            notifySuccessMessage,
             Toast.LENGTH_SHORT
         ).show()
 
@@ -209,6 +215,4 @@ class AddEditAddressActivity : BaseActivity() {
         setResult(RESULT_OK)
         finish()
     }
-    // END
 }
-// END

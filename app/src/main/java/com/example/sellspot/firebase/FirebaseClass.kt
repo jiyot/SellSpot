@@ -107,9 +107,7 @@ class FirebaseClass {
                     is SettingsActivity -> {
                         // Call a function of base activity for transferring the result to it.
                         activity.userDetailsSuccess(user)
-                        // END
                     }
-                    // END
                 }
             }
             .addOnFailureListener { e ->

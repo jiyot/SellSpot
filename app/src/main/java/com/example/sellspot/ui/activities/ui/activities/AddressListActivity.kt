@@ -27,6 +27,9 @@ class AddressListActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAddressListBinding
     private var mSelectAddress: Boolean = false
+    // END
+
+
     /**
      * This function is auto created by Android when the Activity Class is created.
      */
@@ -50,16 +53,22 @@ class AddressListActivity : BaseActivity() {
         // END
 
         setupActionBar()
-        if (mSelectAddress) {
-            binding.tvTitle.text = resources.getString(R.string.title_select_address)
-        }
-        //
 
         // TODO Step 5: If it is about to select the address then update the title.
         // START
+        if (mSelectAddress) {
+            binding.tvTitle.text = resources.getString(R.string.title_select_address)
+        }
+        // END
+
         binding.tvAddAddress.setOnClickListener {
             val intent = Intent(this@AddressListActivity, AddEditAddressActivity::class.java)
+
+            // TODO Step 12: Now to notify the address list about the latest address added we need to make neccessary changes as below.
+            // START
+            // startActivity(intent)
             startActivityForResult(intent, Constants.ADD_ADDRESS_REQUEST_CODE)
+            // END
         }
 
         getAddressList()
@@ -122,6 +131,7 @@ class AddressListActivity : BaseActivity() {
         FirebaseClass().getAddressesList(this@AddressListActivity)
     }
 
+
     /**
      * A function to get the success result of address list from cloud firestore.
      *
@@ -132,27 +142,21 @@ class AddressListActivity : BaseActivity() {
         // Hide the progress dialog
         hideProgressDialog()
 
-        // TODO Step 4: Remove the for loop which is used to print the result in log.
-        // START
-        // Print all the list of addresses in the log with name.
-        for (i in addressList) {
-            Log.i("Name and Address", "${i.name} ::  ${i.address}")
-        }
-        // END
-
-        // TODO Step 5: Populate the address list in the UI.
-        // START
         if (addressList.size > 0) {
+
             binding.rvAddressList.visibility = View.VISIBLE
             binding.tvNoAddressFound.visibility = View.GONE
 
             binding.rvAddressList.layoutManager = LinearLayoutManager(this@AddressListActivity)
             binding.rvAddressList.setHasFixedSize(true)
 
-            val addressAdapter = AddressListAdapter(this@AddressListActivity,  addressList, mSelectAddress)
+            // TODO Step 9: Pass the address selection value.
+            // START
+            val addressAdapter = AddressListAdapter(this@AddressListActivity, addressList, mSelectAddress)
+            // END
             binding.rvAddressList.adapter = addressAdapter
 
-            // TODO Step 3: Add the swipe to edit feature.
+            // TODO Step 7: Don't allow user to edit or delete the address when user is about to select the address.
             // START
             if (!mSelectAddress) {
                 val editSwipeHandler = object : SwipeToEditCallback(this) {
