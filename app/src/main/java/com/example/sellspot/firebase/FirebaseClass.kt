@@ -563,12 +563,7 @@ class FirebaseClass {
             }
     }
 
-    /**
-     * A function to remove the cart item from the cloud firestore.
-     *
-     * @param activity activity class.
-     * @param cart_id cart id of the item.
-     */
+
     fun removeItemFromCart(context: Context, cart_id: String) {
 
         // Cart items collection name
@@ -876,11 +871,6 @@ class FirebaseClass {
         }
     }
 
-    // TODO Step 5: Create a function to get the list of orders from cloud firestore.
-    // START
-    /**
-     * A function to get the list of orders from cloud firestore.
-     */
     fun getMyOrdersList(fragment: OrdersFragment) {
         mFireStore.collection(Constants.ORDERS)
             .whereEqualTo(Constants.USER_ID, getCurrentUserID())
