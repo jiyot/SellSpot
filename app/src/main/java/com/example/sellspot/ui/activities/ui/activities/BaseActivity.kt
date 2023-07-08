@@ -56,7 +56,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * This function is used to dismiss the progress dialog if it is visible to the user on the screen.
+     * This function is used to dismiss the progress dialog if it is visible to the user.
      */
     fun hideProgressDialog() {
         mProgressDialog.dismiss()
