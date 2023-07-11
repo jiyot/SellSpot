@@ -1,13 +1,12 @@
 package com.example.sellspot.ui.activities.ui.activities
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sellspot.R
-import com.example.sellspot.databinding.ActivityAddEditAddressBinding
-import com.example.sellspot.databinding.ActivityAddProductBinding
 import com.example.sellspot.databinding.ActivityCheckoutBinding
 import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.Address
