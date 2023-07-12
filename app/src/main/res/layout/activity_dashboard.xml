@@ -25,8 +25,10 @@
         app:adUnitId="ca-app-pub-3940256099942544/6300978111"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!--        app:adUnitId="ca-app-pub-3940256099942544/6300978111"-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"

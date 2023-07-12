@@ -10,6 +10,7 @@ import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityDashboardBinding
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -20,6 +21,8 @@ class DashboardActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        MobileAds.initialize(applicationContext)
 
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
