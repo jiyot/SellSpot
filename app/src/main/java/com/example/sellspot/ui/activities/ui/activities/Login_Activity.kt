@@ -1,5 +1,6 @@
 package com.example.sellspot.ui.activities.ui.activities
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils

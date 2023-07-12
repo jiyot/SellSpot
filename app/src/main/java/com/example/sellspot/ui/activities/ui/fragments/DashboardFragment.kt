@@ -1,8 +1,12 @@
 package com.example.sellspot.ui.activities.ui.fragments
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageButton
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.sellspot.R
 import com.example.sellspot.databinding.FragmentDashboardBinding
@@ -26,6 +30,7 @@ class DashboardFragment : BaseFragment()  {
         super.onCreate(savedInstanceState)
         // If we want to use the option menu in fragment we need to add it.
         setHasOptionsMenu(true)
+        showFullPageAd()
     }
 
     override fun onCreateView(
@@ -77,7 +82,7 @@ class DashboardFragment : BaseFragment()  {
 
     override fun onResume() {
         super.onResume()
-
+//        showFullPageAd()
         getDashboardItemsList()
     }
 
@@ -128,4 +133,31 @@ class DashboardFragment : BaseFragment()  {
             binding.tvNoDashboardItemsFound.visibility = View.VISIBLE
         }
     }
+
+
+    private fun showFullPageAd() {
+        // Inflate the custom ad layout
+        val adView = layoutInflater.inflate(R.layout.add_layout, null)
+
+        // Show the ad layout as a dialog
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(adView)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+
+        // Set a click listener for the close button
+        val closeButton = adView.findViewById<ImageButton>(R.id.iv_close)
+        closeButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Show the dialog
+        dialog.show()
+    }
+
+
 }
