@@ -84,9 +84,9 @@ class RegisterActivity : BaseActivity() {
                                 binding.etLastName.text.toString().trim { it <= ' ' },
                                 binding.etEmail.text.toString().trim { it <= ' ' }
                             )
-
                             // Pass the required values in the constructor.
                             FirebaseClass().registerUser(this@RegisterActivity, user)
+                            FirebaseClass().addUserToDatabase(user.firstName , user.email , user.id )
 
                         } else {
                             hideProgressDialog()

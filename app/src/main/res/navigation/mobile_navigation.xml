@@ -30,5 +30,10 @@
         android:name="com.example.sellspot.ui.activities.ui.fragments.SoldProductsFragment"
         android:label="@string/title_sold_products"
         tools:layout="@layout/fragment_sold_products" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.sellspot.ui.activities.ui.fragments.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
     <!--END-->
 </navigation>

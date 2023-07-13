@@ -13,12 +13,17 @@
 
     <item
         android:id="@+id/navigation_orders"
-        android:icon="@drawable/ic_vector_products"
+        android:icon="@drawable/ic_vector_orders"
         android:title="@string/title_orders" />
 
     <item
         android:id="@+id/navigation_sold_products"
         android:icon="@drawable/ic_vector_sold_products"
         android:title="@string/title_sold_products" />
+    <item
+        android:id="@+id/chatFragment"
+        android:icon="@drawable/ic_vector_chat"
+        android:title="@string/user_chat" />
+
     <!--END-->
 </menu>

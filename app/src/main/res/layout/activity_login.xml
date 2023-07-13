@@ -66,8 +66,8 @@
             android:padding="@dimen/et_padding"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/et_textSize"
-            tools:text="jiyot@gmail.com"
-            android:text="jiyot@gmail.com"/>
+            tools:text="ranjith@gmail.com"
+            android:text="ranjith@gmail.com"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
