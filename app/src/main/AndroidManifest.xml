@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 
     <application
@@ -51,15 +52,24 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
         <activity
             android:name=".ui.activities.ui.activities.ProductDetailsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Replace "sellspotapp" with your chosen scheme and "example.com" with your chosen host -->
+                <data
+                    android:scheme="sellspotapp"
+                    android:host="example.com" />
+            </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.activities.ui.activities.CartListActivity"
             android:exported="false"
@@ -114,17 +124,24 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-            <!-- android:exported="true"> -->
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+
+                <!-- Replace "sellspotapp" with your chosen scheme and "example.com" with your chosen host -->
+                <data
+                    android:scheme="sellspotapp"
+                    android:host="example.com" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+            <!-- ... -->
         </activity>
+
+
         <activity
             android:name=".ui.activities.ui.activities.MainActivity"
             android:exported="true"

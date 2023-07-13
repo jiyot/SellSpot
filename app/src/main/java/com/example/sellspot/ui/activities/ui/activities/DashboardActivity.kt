@@ -23,7 +23,6 @@ class DashboardActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         MobileAds.initialize(applicationContext)
-
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

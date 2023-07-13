@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sellspot.R
 import com.example.sellspot.databinding.ItemListLayoutBinding
 import com.example.sellspot.model.Order
 import com.example.sellspot.ui.activities.ui.activities.MyOrderDetailsActivity

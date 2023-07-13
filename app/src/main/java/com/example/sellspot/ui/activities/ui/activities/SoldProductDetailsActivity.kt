@@ -1,17 +1,14 @@
 package com.example.sellspot.ui.activities.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.sellspot.R
-
 import com.example.sellspot.databinding.ActivitySoldProductDetailsBinding
 import com.example.sellspot.model.SoldProduct
 import com.example.sellspot.utils.Constants
 import com.myshoppal.utils.GlideLoader
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.util.*
 
 // TODO Step 1: Create an empty activity for SoldProductDetails and replace the AppCompatActivity with BaseActivity.
 // START
