@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:paddingStart="@dimen/toolbar_title_paddingStart"
@@ -27,10 +27,19 @@
             android:textSize="@dimen/toolbar_title_text_size"
             android:textStyle="bold" />
 
+        <ImageButton
+            android:id="@+id/btn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_share"
+            android:contentDescription="share"
+            android:visibility="visible"
+            android:layout_gravity="right"/>
     </androidx.appcompat.widget.Toolbar>
 
+
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbars="none"
@@ -51,6 +60,7 @@
                 android:contentDescription="@string/content_description"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,6 +152,18 @@
                     android:textStyle="bold"
                     tools:text="5" />
             </LinearLayout>
+
+
+<!--            <Button-->
+<!--                android:id="@+id/btn_share"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Share"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.95"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                tools:ignore="MissingConstraints" />-->
 
             <com.example.sellspot.utils.SSButton
                 android:id="@+id/btn_add_to_cart"
