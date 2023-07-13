@@ -39,6 +39,7 @@
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:foregroundGravity="center"
         android:gravity="center" />
 
     <Button
