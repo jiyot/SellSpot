@@ -1,11 +1,12 @@
 package com.example.sellspot.ui.activities.ui.activities
 
-
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.WindowManager
+import android.widget.CheckBox
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityLoginBinding
 import com.example.sellspot.firebase.FirebaseClass
@@ -13,10 +14,11 @@ import com.example.sellspot.model.User
 import com.example.sellspot.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 
-
-class LoginActivity : BaseActivity()  {
+class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var rememberMeCheckbox: CheckBox
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,21 +30,34 @@ class LoginActivity : BaseActivity()  {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        rememberMeCheckbox = findViewById(R.id.checkbox_remember_me)
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+
+        // Load the "Remember Me" preference
+        val rememberMe = sharedPreferences.getBoolean("rememberMe", false)
+        rememberMeCheckbox.isChecked = rememberMe
+
+        // Load the stored email and password if "Remember Me" is checked
+        if (rememberMe) {
+            val storedEmail = sharedPreferences.getString("email", "")
+            val storedPassword = sharedPreferences.getString("password", "")
+            binding.etEmail.setText(storedEmail)
+            binding.etPassword.setText(storedPassword)
+        }
+
         binding.tvRegister.setOnClickListener {
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
         }
 
         binding.btnLogin.setOnClickListener {
-
             loginActivity()
         }
+
         binding.tvForgotPassword.setOnClickListener {
             val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 
     /**
@@ -68,9 +83,7 @@ class LoginActivity : BaseActivity()  {
      * A function to Log-In. The user will be able to log in using the registered email and password with Firebase Authentication.
      */
     private fun loginActivity() {
-
         if (validateLoginDetails()) {
-
             // Show the progress dialog.
             showProgressDialog(resources.getString(R.string.please_wait))
 
@@ -81,8 +94,25 @@ class LoginActivity : BaseActivity()  {
             // Log-In using FirebaseAuth
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
-
                     if (task.isSuccessful) {
+                        // Save the "Remember Me" preference in SharedPreferences
+                        val rememberMeChecked = rememberMeCheckbox.isChecked
+                        val editor = sharedPreferences.edit()
+                        editor.putBoolean("rememberMe", rememberMeChecked)
+                        editor.apply()
+
+                        // Save the email and password if "Remember Me" is checked
+                        if (rememberMeChecked) {
+                            editor.putString("email", email)
+                            editor.putString("password", password)
+                            editor.apply()
+                        } else {
+                            // Clear the stored email and password
+                            editor.remove("email")
+                            editor.remove("password")
+                            editor.apply()
+                        }
+
                         FirebaseClass().getUserDetails(this@LoginActivity)
                     } else {
                         // Hide the progress dialog
@@ -93,12 +123,10 @@ class LoginActivity : BaseActivity()  {
         }
     }
 
-
     /**
      * A function to notify user that logged in success and get the user details from the FireStore database after authentication.
      */
     fun userLoggedInSuccess(user: User) {
-
         // Hide the progress dialog.
         hideProgressDialog()
 
@@ -121,5 +149,4 @@ class LoginActivity : BaseActivity()  {
         finish()
         // END
     }
-
 }

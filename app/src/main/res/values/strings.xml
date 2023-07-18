@@ -204,5 +204,7 @@
 
     <string name="user_chat">Chat</string>
 
+    <string name="remember_me">Remember Me</string>
+
 
 </resources>
