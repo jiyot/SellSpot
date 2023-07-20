@@ -205,6 +205,7 @@
     <string name="user_chat">Chat</string>
 
     <string name="remember_me">Remember Me</string>
+    <string name="lbl_product_details_user">Product Seller</string>
 
 
 </resources>

@@ -3,6 +3,7 @@ package com.example.sellspot.ui.activities.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
@@ -24,9 +25,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
     private var mProductId: String = ""
     private lateinit var binding: ActivityProductDetailsBinding
 
-    /**
-     * This function is auto created by Android when the Activity Class is created.
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailsBinding.inflate(layoutInflater)
@@ -52,6 +50,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
         binding.btnAddToCart.setOnClickListener(this)
         binding.btnGoToCart.setOnClickListener(this)
+        binding.btnConnectUser.setOnClickListener(this)
 
         getProductDetails()
     }
@@ -85,33 +84,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-
-//    private fun shareProduct() {
-//        val shareIntent = Intent(Intent.ACTION_SEND)
-//        shareIntent.type = "text/plain"
-//        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Check out this product")
-//        shareIntent.putExtra(
-//            Intent.EXTRA_TEXT,
-//            "I found this amazing product: ${mProductDetails.title}\n\n${mProductDetails.description}"
-//        )
-//        startActivity(Intent.createChooser(shareIntent, "Share via"))
-//    }
-
-
-//    private fun shareProduct() {
-//        val message = "I found this amazing product: ${mProductDetails.title}\n\n${mProductDetails.description}"
-//
-//        // Create a share intent with the message
-//        val shareIntent = Intent(Intent.ACTION_SEND)
-//        shareIntent.type = "text/plain"
-//        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Check out this product")
-//        shareIntent.putExtra(Intent.EXTRA_TEXT, "$message\n\nOpen in SellSpot: sellspotapp://example.com?productId=$mProductId&userId=$mProductOwnerId")
-//
-//        // Create a chooser intent to give the user the option to share via the app or other apps
-//        val chooserIntent = Intent.createChooser(shareIntent, "Share via")
-//        startActivity(chooserIntent)
-//    }
-
     private fun shareProduct() {
         val message = "I found this amazing product: ${mProductDetails.title}\n\n${mProductDetails.description}"
 
@@ -139,21 +111,26 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-
-
-
     override fun onClick(v: View?) {
-        v?.let {
-            when (it.id) {
-                R.id.btn_add_to_cart -> {
-                    addToCart()
-                }
-                R.id.btn_go_to_cart -> {
-                    startActivity(Intent(this@ProductDetailsActivity, CartListActivity::class.java))
-                }
-            }
+        when (v?.id) {
+            R.id.btn_connect_user -> connectToSeller()
+            R.id.btn_add_to_cart -> addToCart()
+            R.id.btn_go_to_cart -> startActivity(Intent(this@ProductDetailsActivity, CartListActivity::class.java))
         }
     }
+
+    private fun connectToSeller() {
+        // Log the values before starting the ChatActivity
+        Log.d("ProductDetailsActivity", "Seller UID: $mProductOwnerId")
+        Log.d("ProductDetailsActivity", "Seller Name: ${mProductDetails.user_name}")
+        Log.d("ProductDetailsActivity", "This is Working")
+
+        val intent = Intent(this, ChatActivity::class.java)
+        intent.putExtra("uid", mProductOwnerId) // Pass the seller's UID to the ChatActivity
+        intent.putExtra("name", mProductDetails.user_name) // Pass the seller's name to the ChatActivity
+        startActivity(intent)
+    }
+
 
     private fun addToCart() {
         val addToCart = Cart(
@@ -187,6 +164,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         binding.tvProductDetailsPrice.text = "$${product.price}"
         binding.tvProductDetailsDescription.text = product.description
         binding.tvProductDetailsAvailableQuantity.text = product.stock_quantity
+        binding.tvProductDetailsAvailableUser.text = product.user_name
 
         if (FirebaseClass().getCurrentUserID() != product.user_id) {
             FirebaseClass().checkIfItemExistInCart(this@ProductDetailsActivity, mProductId)

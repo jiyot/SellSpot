@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.ui.activities.ProductDetailsActivity">
 
+    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_product_details_activity"
         android:layout_width="match_parent"
@@ -34,10 +35,10 @@
             android:src="@drawable/ic_share"
             android:contentDescription="share"
             android:visibility="visible"
-            android:layout_gravity="right"/>
+            android:layout_gravity="right" />
     </androidx.appcompat.widget.Toolbar>
 
-
+    <!-- Scroll View -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -48,10 +49,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_product_details_activity">
 
+        <!-- Product Details Content -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- Product Image -->
             <ImageView
                 android:id="@+id/iv_product_detail_image"
                 android:layout_width="match_parent"
@@ -64,6 +67,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Product Title and Price -->
             <LinearLayout
                 android:id="@+id/ll_product_details_title_price"
                 android:layout_width="match_parent"
@@ -93,6 +97,7 @@
                     tools:text="$100" />
             </LinearLayout>
 
+            <!-- Product Description -->
             <com.example.sellspot.utils.SSTextViewBold
                 android:id="@+id/tv_product_details_label"
                 android:layout_width="match_parent"
@@ -118,6 +123,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_product_details_label"
                 tools:text="This is product details description." />
 
+            <!-- Product Stock Quantity -->
             <LinearLayout
                 android:id="@+id/ll_product_details_quantity"
                 android:layout_width="match_parent"
@@ -153,25 +159,74 @@
                     tools:text="5" />
             </LinearLayout>
 
+            <!-- Product Seller Information -->
+            <LinearLayout
+                android:id="@+id/ll_product_details_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/product_details_label_margin"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_product_details_quantity">
 
-<!--            <Button-->
-<!--                android:id="@+id/btn_share"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Share"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.95"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                tools:ignore="MissingConstraints" />-->
+                <com.example.sellspot.utils.SSTextViewBold
+                    android:id="@+id/tv_product_details_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/product_details_stock_quantity_paddingStartEnd"
+                    android:text="@string/lbl_product_details_user"
+                    android:textColor="@color/item_value_text_color"
+                    android:textSize="@dimen/product_details_label_textSize" />
 
+                <com.sellspot.utils.SSTextView
+                    android:id="@+id/tv_product_details_available_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/item_grey_border_background"
+                    android:paddingStart="@dimen/product_details_stock_quantity_paddingStartEnd"
+                    android:paddingTop="@dimen/product_details_stock_quantity_paddingTopBottom"
+                    android:paddingEnd="@dimen/product_details_stock_quantity_paddingStartEnd"
+                    android:paddingBottom="@dimen/product_details_stock_quantity_paddingTopBottom"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/product_details_stock_quantity_textSize"
+                    android:textStyle="bold"
+                    tools:text="" />
+            </LinearLayout>
+
+            <!-- Connect with Seller Button -->
+            <com.example.sellspot.utils.SSButton
+                android:id="@+id/btn_connect_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingTop="@dimen/btn_padding"
+                android:paddingBottom="@dimen/btn_padding"
+                android:text="Connect with seller"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_textSize"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_product_details_user"
+                tools:visibility="visible" />
+
+            <!-- Add to Cart Button -->
             <com.example.sellspot.utils.SSButton
                 android:id="@+id/btn_add_to_cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/button_background"
@@ -185,17 +240,17 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_product_details_quantity"
+                app:layout_constraintTop_toBottomOf="@id/btn_connect_user"
                 tools:visibility="visible" />
 
-
+            <!-- Go to Cart Button -->
             <com.example.sellspot.utils.SSButton
                 android:id="@+id/btn_go_to_cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/button_background"
