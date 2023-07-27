@@ -4,6 +4,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:id="@+id/layout_sent_message"
         android:layout_width="wrap_content"
         android:background="@drawable/btn_background"
         android:layout_alignParentRight="true"
@@ -15,10 +16,21 @@
             android:id="@+id/txt_sent_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is sent message"
+            android:text="This is a sent message"
             android:textColor="@color/white"
             android:padding="10dp"
             android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/txt_sent_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_sent_message"
+            android:text="Sent timestamp"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:textSize="14sp" />
     </RelativeLayout>
+
 
 </RelativeLayout>

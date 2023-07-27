@@ -41,11 +41,20 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         setupActionBar()
         setupShareButton()
 
-        if (FirebaseClass().getCurrentUserID() == mProductOwnerId) {
+        // Check if the current user is the product owner
+        val currentUserID = FirebaseClass().getCurrentUserID()
+        val isCurrentUserProductOwner = currentUserID == mProductOwnerId
+
+        // Set visibility of buttons based on ownership
+        if (isCurrentUserProductOwner) {
+            // Hide the buttons for the product owner
             binding.btnAddToCart.visibility = View.GONE
             binding.btnGoToCart.visibility = View.GONE
+            binding.btnConnectUser.visibility = View.GONE
         } else {
+            // Show the buttons for non-product owners
             binding.btnAddToCart.visibility = View.VISIBLE
+            binding.btnConnectUser.visibility = View.VISIBLE
         }
 
         binding.btnAddToCart.setOnClickListener(this)

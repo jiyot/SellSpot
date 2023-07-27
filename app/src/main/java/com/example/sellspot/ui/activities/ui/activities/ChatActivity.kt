@@ -1,22 +1,19 @@
 package com.example.sellspot.ui.activities.ui.activities
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sellspot.R
 import com.example.sellspot.model.Message
 import com.example.sellspot.ui.activities.ui.adapters.MessageAdapter
+
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 class ChatActivity : AppCompatActivity() {
 
@@ -44,10 +41,11 @@ class ChatActivity : AppCompatActivity() {
         val senderUid = FirebaseAuth.getInstance().currentUser?.uid
         mDbRef = FirebaseDatabase.getInstance().reference
 
+        supportActionBar?.title = name
+
         senderRoom = receiverUid + senderUid
         receiverRoom = senderUid + receiverUid
 
-        supportActionBar?.title = name
 
         chatRecyclerView = findViewById(R.id.charRecyclerView)
         messageBox = findViewById(R.id.messageBox)
@@ -74,7 +72,7 @@ class ChatActivity : AppCompatActivity() {
                 }
             })
 
-        sendButton.setOnClickListener{
+        sendButton.setOnClickListener {
             val message = messageBox.text.toString()
             val messageObject = Message(message, senderUid)
 
