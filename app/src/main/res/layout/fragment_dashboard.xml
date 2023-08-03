@@ -6,17 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.ui.fragments.DashboardFragment">
 
-    <EditText
-        android:id="@+id/et_search"
+    <SearchView
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="Search products..."
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:queryHint="Search products..."
+        app:iconifiedByDefault="false"
+        android:background="@color/white"
+        tools:ignore="MissingConstraints" />
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -24,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/et_search"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -39,7 +37,7 @@
         android:text="@string/no_dashboard_item_found"
         android:textAlignment="center"
         android:textSize="@dimen/no_data_found_textSize"
-        app:layout_constraintTop_toBottomOf="@id/et_search"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -49,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/et_search"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
