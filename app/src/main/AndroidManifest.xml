@@ -75,6 +75,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.stripe.android.payments.StripeBrowserLauncherActivity"
+            android:exported="true">
+            <!-- Intent filters or other activity attributes -->
+        </activity>
         <activity
             android:name=".ui.activities.ui.activities.CartListActivity"
             android:exported="false"

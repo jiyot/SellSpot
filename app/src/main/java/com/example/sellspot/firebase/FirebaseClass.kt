@@ -471,6 +471,7 @@ class FirebaseClass {
                     product.product_id = i.id
                     productsList.add(product)
                 }
+                //fragment.hideProgressDialog()
 
                 // Pass the success result to the base fragment.
                 fragment.successDashboardItemsList(productsList)

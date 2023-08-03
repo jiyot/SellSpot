@@ -2,6 +2,7 @@ package com.myshoppal.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,7 @@ import com.myshoppal.utils.GlideLoader
  */
 open class DashboardItemsListAdapter(
     private val context: Context,
-    private var list: ArrayList<Product>
+    var list: ArrayList<Product>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var _itemBinding: ItemDashboardLayoutBinding? = null
@@ -48,7 +49,7 @@ open class DashboardItemsListAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
-
+        Log.d("DashboardItemsListAdapter", "Binding position: $position, Product: $model")
         if (holder is MyViewHolder) {
 
             GlideLoader(context).loadProductPicture(
