@@ -33,7 +33,7 @@
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.example.sellspot.ui.activities.ui.fragments.ChatFragment"
-        android:label="fragment_chat"
+        android:label="Chat"
         tools:layout="@layout/fragment_chat" />
     <!--END-->
 </navigation>

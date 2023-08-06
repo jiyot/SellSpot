@@ -1,3 +1,4 @@
+package com.example.sellspot.ui.activities.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
