@@ -15,6 +15,8 @@ import com.example.sellspot.model.Order
 import com.example.sellspot.model.Product
 import com.example.sellspot.ui.activities.ui.adapters.CartItemsListAdapter
 import com.example.sellspot.utils.Constants
+import com.razorpay.Checkout
+import org.json.JSONObject
 
 // TODO Step 1: Create a CheckoutActivity.
 // START
@@ -48,6 +50,9 @@ class CheckoutActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
+        // Initialize the Razorpay client
+        Checkout.preload(applicationContext)
+
         // TODO Step 7: Call the function to setup the action bar.
         // START
         setupActionBar()
@@ -75,7 +80,8 @@ class CheckoutActivity : BaseActivity() {
         // TODO Step 11: Assign a click event to the btn place order and call the function.
         // START
         binding.btnPlaceOrder.setOnClickListener {
-            placeAnOrder()
+//            placeAnOrder()
+            startPayment()
         }
         // END
 
@@ -199,7 +205,7 @@ class CheckoutActivity : BaseActivity() {
     /**
      * A function to prepare the Order details to place an order.
      */
-    private fun placeAnOrder() {
+    fun placeAnOrder() {
 
         // Show the progress dialog.
         showProgressDialog(resources.getString(R.string.please_wait))
@@ -265,4 +271,31 @@ class CheckoutActivity : BaseActivity() {
         finish()
         // END
     }
+
+    private fun startPayment() {
+        val razorpay = Checkout()
+
+        // Set your Razorpay API key here
+        razorpay.setKeyID("rzp_test_GGHfhzskNR20i7")
+
+        try {
+            // Prepare the order details in JSON format
+            val options = JSONObject()
+            options.put("name", "Your Company Name")
+            options.put("description", "Test Payment")
+            options.put("image", "https://your-company-logo-url.png")
+            options.put("currency", "USD") // Use USD for US Dollar
+            options.put("amount", (mTotalAmount * 100).toLong()) // Convert dollar amount to cents
+
+            // Start the payment process with PaymentResultListener as an anonymous object
+            razorpay.open(this, options)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Error in payment: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+
+
 }

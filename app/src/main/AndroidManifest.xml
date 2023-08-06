@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -57,7 +58,18 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.razorpay.CheckoutActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <!-- Other activity attributes -->
+        </activity>
 
+        <receiver
+            android:name="com.razorpay.RzpTokenReceiver"
+            android:exported="true">
+            <!-- Other receiver attributes -->
+        </receiver>
 
         <activity
             android:name=".ui.activities.ui.activities.ProductDetailsActivity"
@@ -75,10 +87,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.stripe.android.payments.StripeBrowserLauncherActivity"
-            android:exported="true">
-            <!-- Intent filters or other activity attributes -->
-        </activity>
         <activity
             android:name=".ui.activities.ui.activities.CartListActivity"
             android:exported="false"
@@ -127,6 +135,14 @@
             android:name=".ui.activities.ui.activities.AddEditAddressActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <!-- Add the tools:replace attribute to resolve the merging conflict -->
+        <activity
+            android:name="com.stripe.android.payments.StripeBrowserLauncherActivity"
+            android:exported="true"
+            tools:replace="android:exported" />
+
         <activity
             android:name=".ui.activities.ui.activities.SpllashActivity"
             android:exported="true"
