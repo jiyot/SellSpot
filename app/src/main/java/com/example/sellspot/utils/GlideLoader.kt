@@ -1,4 +1,4 @@
-package com.myshoppal.utils
+package com.example.sellspot.utils
 
 import android.content.Context
 import android.widget.ImageView

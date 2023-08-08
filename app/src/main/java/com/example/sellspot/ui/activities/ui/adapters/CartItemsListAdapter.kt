@@ -13,7 +13,8 @@ import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.Cart
 import com.example.sellspot.ui.activities.ui.activities.CartListActivity
 import com.example.sellspot.utils.Constants
-import com.myshoppal.utils.GlideLoader
+import com.example.sellspot.utils.GlideLoader
+
 
 /**
  * A adapter class for dashboard items list.

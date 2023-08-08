@@ -12,7 +12,8 @@ import com.example.sellspot.model.Product
 import com.example.sellspot.ui.activities.ui.activities.ProductDetailsActivity
 import com.example.sellspot.ui.activities.ui.fragments.ProductsFragment
 import com.example.sellspot.utils.Constants
-import com.myshoppal.utils.GlideLoader
+import com.example.sellspot.utils.GlideLoader
+
 
 open class MyProductsListAdapter(
     private val context: Context,

@@ -17,7 +17,7 @@ import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityUserProfileBinding
 import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.utils.Constants
-import com.myshoppal.utils.GlideLoader
+import com.example.sellspot.utils.GlideLoader
 
 import java.io.IOException
 

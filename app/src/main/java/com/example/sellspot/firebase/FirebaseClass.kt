@@ -995,7 +995,22 @@ class FirebaseClass {
             }
     }
 
-    // TODO Step 1: Create a function to get the list of sold products.
+    fun getUserProfileImageURL(uid: String, onComplete: (String?) -> Unit) {
+        mFireStore.collection(Constants.USERS)
+            .document(uid)
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                val user = documentSnapshot.toObject(User::class.java)
+                val profileImageURL = user?.image
+                onComplete(profileImageURL)
+            }
+            .addOnFailureListener { e ->
+                onComplete(null)
+                Log.e("FirebaseClass", "Error fetching user profile image URL", e)
+            }
+    }
+
+
     // START
     /**
      * A function to get the list of sold products from the cloud firestore.

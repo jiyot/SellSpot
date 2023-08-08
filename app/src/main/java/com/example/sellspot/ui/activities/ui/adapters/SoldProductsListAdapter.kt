@@ -10,7 +10,8 @@ import com.example.sellspot.databinding.ItemListLayoutBinding
 import com.example.sellspot.model.SoldProduct
 import com.example.sellspot.ui.activities.ui.activities.SoldProductDetailsActivity
 import com.example.sellspot.utils.Constants
-import com.myshoppal.utils.GlideLoader
+import com.example.sellspot.utils.GlideLoader
+
 
 // TODO Step 6: Create an adapter class for Sold Products list.
 // START

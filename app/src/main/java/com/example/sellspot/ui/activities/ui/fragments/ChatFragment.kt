@@ -1,5 +1,6 @@
 package com.example.sellspot.ui.activities.ui.fragments
 
+import com.example.sellspot.firebase.FirebaseClass
 import Chat
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,12 +21,17 @@ class ChatFragment : Fragment() {
     private lateinit var adapter: UserAdapter
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
+    private lateinit var firebaseClass: FirebaseClass
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
 
         mAuth = FirebaseAuth.getInstance()
         mDbRef = FirebaseDatabase.getInstance().reference
+        firebaseClass = FirebaseClass()
 
         userList = ArrayList()
         adapter = UserAdapter(requireContext(), userList)
@@ -43,6 +49,8 @@ class ChatFragment : Fragment() {
                     val currentUser = postSnapshot.getValue(Chat::class.java)
                     if (mAuth.currentUser?.uid != currentUser?.uid) {
                         userList.add(currentUser!!)
+                        // Fetch profile image URL for this user
+                        currentUser.uid?.let { fetchAndSetProfileImageURL(it, currentUser) }
                     }
                 }
                 adapter.notifyDataSetChanged()
@@ -56,19 +64,10 @@ class ChatFragment : Fragment() {
         return view
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.menu, menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (item.itemId == R.id.logout) {
-//            mAuth.signOut()
-//            val intent = Intent(requireContext(), LogIn::class.java)
-//            requireActivity().finish()
-//            startActivity(intent)
-//            return true
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+    private fun fetchAndSetProfileImageURL(uid: String, chatUser: Chat) {
+        firebaseClass.getUserProfileImageURL(uid) { profileImageURL ->
+            chatUser.profileImageURL = profileImageURL
+            adapter.notifyDataSetChanged()
+        }
+    }
 }

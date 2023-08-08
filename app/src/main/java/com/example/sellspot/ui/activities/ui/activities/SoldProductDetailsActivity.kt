@@ -6,7 +6,8 @@ import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivitySoldProductDetailsBinding
 import com.example.sellspot.model.SoldProduct
 import com.example.sellspot.utils.Constants
-import com.myshoppal.utils.GlideLoader
+import com.example.sellspot.utils.GlideLoader
+
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -4,10 +4,12 @@ import android.os.Parcelable
 class Chat(
     var name: String? = null,
     var email: String? = null,
-    var uid: String? = null
+    var uid: String? = null,
+    var profileImageURL: String? = null // New attribute for profile image URL
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
@@ -17,6 +19,7 @@ class Chat(
         parcel.writeString(name)
         parcel.writeString(email)
         parcel.writeString(uid)
+        parcel.writeString(profileImageURL) // Write profileImageURL to Parcel
     }
 
     override fun describeContents(): Int {

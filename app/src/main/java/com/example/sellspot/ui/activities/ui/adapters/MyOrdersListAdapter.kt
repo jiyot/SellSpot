@@ -10,7 +10,8 @@ import com.example.sellspot.databinding.ItemListLayoutBinding
 import com.example.sellspot.model.Order
 import com.example.sellspot.ui.activities.ui.activities.MyOrderDetailsActivity
 import com.example.sellspot.utils.Constants
-import com.myshoppal.utils.GlideLoader
+import com.example.sellspot.utils.GlideLoader
+
 
 open class MyOrdersListAdapter(
     private val context: Context,

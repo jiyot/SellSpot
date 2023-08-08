@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sellspot.databinding.ItemDashboardLayoutBinding
 import com.example.sellspot.model.Product
-import com.myshoppal.utils.GlideLoader
+import com.example.sellspot.utils.GlideLoader
 
 /**
  * A adapter class for dashboard items list.

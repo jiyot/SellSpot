@@ -14,7 +14,8 @@ import com.example.sellspot.firebase.FirebaseClass
 import com.example.sellspot.model.Cart
 import com.example.sellspot.model.Product
 import com.example.sellspot.utils.Constants
-import com.myshoppal.utils.GlideLoader
+import com.example.sellspot.utils.GlideLoader
+
 
 /**
  * Product Details Screen.
