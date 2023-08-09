@@ -979,26 +979,31 @@ class FirebaseClass {
                 val list: ArrayList<Order> = ArrayList()
 
                 for (i in document.documents) {
-
                     val orderItem = i.toObject(Order::class.java)!!
                     orderItem.id = i.id
 
                     list.add(orderItem)
                 }
 
-                // TODO Step 7: Notify the success result to base class.
-                // START
-                fragment.populateOrdersListInUI(list)
-                // END
+                // Sort the list by order title
+                val sortedList = list.sortedBy { it.title }
+
+                // Convert the sorted list to an ArrayList
+                val sortedArrayList = ArrayList(sortedList)
+
+                // Notify the success result to the fragment with the sorted ArrayList
+                fragment.populateOrdersListInUI(sortedArrayList)
             }
             .addOnFailureListener { e ->
-                // Here call a function of base activity for transferring the result to it.
+                // Here call a function of the base activity for transferring the result to it.
 
                 fragment.hideProgressDialog()
 
                 Log.e(fragment.javaClass.simpleName, "Error while getting the orders list.", e)
             }
     }
+
+
 
     fun getUserProfileImageURL(uid: String, onComplete: (String?) -> Unit) {
         mFireStore.collection(Constants.USERS)
