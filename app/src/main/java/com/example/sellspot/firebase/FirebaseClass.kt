@@ -360,7 +360,7 @@ class FirebaseClass {
             .get() // Will get the documents snapshots.
             .addOnSuccessListener { document ->
 
-                // Here we get the list of boards in the form of documents.
+                // Here we get the list of products in the form of documents.
                 Log.e("Products List", document.documents.toString())
 
                 // Here we have created a new instance for Products ArrayList.
@@ -375,9 +375,12 @@ class FirebaseClass {
                     productsList.add(product)
                 }
 
+                // Sort the productsList by title
+                val sortedProductsList = productsList.sortedBy { it.title }
+
                 when (fragment) {
                     is ProductsFragment -> {
-                        fragment.successProductsListFromFireStore(productsList)
+                        fragment.successProductsListFromFireStore(ArrayList(sortedProductsList))
                     }
                 }
             }
@@ -392,6 +395,8 @@ class FirebaseClass {
                 Log.e("Get Product List", "Error while getting product list.", e)
             }
     }
+
+
 
     /**
      * A function to get all the product list from the cloud firestore.
