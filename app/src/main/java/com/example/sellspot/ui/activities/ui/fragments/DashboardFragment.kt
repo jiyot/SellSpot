@@ -17,10 +17,11 @@ import com.example.sellspot.model.Product
 import com.example.sellspot.ui.activities.ui.activities.CartListActivity
 import com.example.sellspot.ui.activities.ui.activities.ProductDetailsActivity
 import com.example.sellspot.ui.activities.ui.activities.SettingsActivity
+import com.example.sellspot.ui.activities.ui.adapters.DashboardItemsListAdapter
 import com.example.sellspot.utils.Constants
-import com.myshoppal.ui.adapters.DashboardItemsListAdapter
 
-class DashboardFragment : BaseFragment()  {
+
+class DashboardFragment : BaseFragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
@@ -36,6 +37,9 @@ class DashboardFragment : BaseFragment()  {
         // If we want to use the option menu in fragment we need to add it.
         setHasOptionsMenu(true)
         showFullPageAd()
+
+        // Initialize allProductsList with an empty list
+        allProductsList = ArrayList()
     }
 
     override fun onCreateView(
@@ -43,25 +47,16 @@ class DashboardFragment : BaseFragment()  {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        val dashboardViewModel =
-//            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // ...
-
-        // Initialize allProductsList with an empty list
-        allProductsList = ArrayList()
-
-        // Initialize the adapter with an empty list
-        adapter = DashboardItemsListAdapter(requireActivity(), ArrayList())
+        // Initialize the adapter with the allProductsList
+        adapter = DashboardItemsListAdapter(requireActivity(), allProductsList)
         binding.rvDashboardItems.adapter = adapter
 
         // Call the function to fetch all products from Firestore
@@ -79,7 +74,6 @@ class DashboardFragment : BaseFragment()  {
             }
         })
     }
-
     private fun searchProducts(query: String) {
         val filteredList = allProductsList.filter {
             it.title.contains(query, ignoreCase = true)
@@ -146,11 +140,12 @@ class DashboardFragment : BaseFragment()  {
      * @param dashboardItemsList List of products fetched from Firestore.
      */
     fun successDashboardItemsList(dashboardItemsList: ArrayList<Product>) {
-        // Update the allProductsList with the received dashboardItemsList
-        allProductsList = dashboardItemsList
+        // Clear the existing list and add new data
+        allProductsList.clear()
+        allProductsList.addAll(dashboardItemsList)
 
-        // Hide the progress dialog.
-        // hideProgressDialog()
+        // Notify the adapter about the data change
+        adapter.notifyDataSetChanged()
 
         if (dashboardItemsList.size > 0) {
             // Show the RecyclerView and hide the "No Items Found" TextView
@@ -161,17 +156,16 @@ class DashboardFragment : BaseFragment()  {
             binding.rvDashboardItems.setHasFixedSize(true)
 
             // Update the adapter with the received dashboardItemsList
-            adapter.list = dashboardItemsList
-            adapter.notifyDataSetChanged()
-
             adapter.setOnClickListener(object : DashboardItemsListAdapter.OnClickListener {
                 override fun onClick(position: Int, product: Product) {
+                    Log.d("DashboardFragment", "Clicked Product: $product")
                     val intent = Intent(context, ProductDetailsActivity::class.java)
                     intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
                     intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.user_id)
                     startActivity(intent)
                 }
             })
+
         } else {
             // Show the "No Items Found" TextView and hide the RecyclerView
             binding.rvDashboardItems.visibility = View.GONE

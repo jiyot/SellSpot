@@ -16,7 +16,6 @@ import com.example.sellspot.model.Product
 import com.example.sellspot.utils.Constants
 import com.example.sellspot.utils.GlideLoader
 
-
 /**
  * Product Details Screen.
  */
@@ -31,14 +30,22 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         binding = ActivityProductDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        if (intent.hasExtra(Constants.EXTRA_PRODUCT_ID)) {
+//            mProductId = intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
+//        }
+//
+//        if (intent.hasExtra(Constants.EXTRA_PRODUCT_OWNER_ID)) {
+//            mProductOwnerId = intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
+//        }
         if (intent.hasExtra(Constants.EXTRA_PRODUCT_ID)) {
             mProductId = intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
+            Log.d("ProductDetailsActivity", "Received Product ID: $mProductId")
         }
 
         if (intent.hasExtra(Constants.EXTRA_PRODUCT_OWNER_ID)) {
             mProductOwnerId = intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
+            Log.d("ProductDetailsActivity", "Received Owner ID: $mProductOwnerId")
         }
-
         setupActionBar()
         setupShareButton()
 
