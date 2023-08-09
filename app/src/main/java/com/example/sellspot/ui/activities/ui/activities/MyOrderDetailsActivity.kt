@@ -1,25 +1,25 @@
 package com.example.sellspot.ui.activities.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sellspot.R
 import com.example.sellspot.databinding.ActivityMyOrderDetailsBinding
-
 import com.example.sellspot.model.Order
 import com.example.sellspot.ui.activities.ui.adapters.CartItemsListAdapter
 import com.example.sellspot.utils.Constants
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class MyOrderDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyOrderDetailsBinding
+
+    private var fromPlacingOrder: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //This call the parent constructor
@@ -60,6 +60,15 @@ class MyOrderDetailsActivity : AppCompatActivity() {
 
         binding.toolbarMyOrderDetailsActivity.setNavigationOnClickListener { onBackPressed() }
     }
+
+//    override fun onBackPressed() {
+//        // Override the back button behavior here
+//        // For example, you can navigate to a different activity or perform an action
+//        val intent = Intent(this, DashboardActivity::class.java)
+//        startActivity(intent)
+//        finish() // Close the current activity
+//    }
+
 
     private fun setupUI(orderDetails: Order) {
 

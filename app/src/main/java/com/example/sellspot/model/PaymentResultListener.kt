@@ -6,19 +6,14 @@ import com.example.sellspot.ui.activities.ui.activities.CheckoutActivity
 import com.razorpay.PaymentResultListener
 
 class PaymentResultListener(private val context: Context) : PaymentResultListener {
-    override fun onPaymentSuccess(razorpayPaymentID: String?) {
-        // Payment successful. You can implement your own logic here.
-        // For example, update the order status and show a success message to the user.
 
-        Toast.makeText(
-            context,
-            "Payment successful. Payment ID: $razorpayPaymentID",
-            Toast.LENGTH_SHORT
-        ).show()
-
-        // Call the function to place an order after successful payment
+    override fun onPaymentSuccess(razorpayPaymentId: String) {
+        // Payment successful, call your function to place the order
         (context as CheckoutActivity).placeAnOrder()
+
+        Toast.makeText(context, "Payment successful! Order placed.", Toast.LENGTH_SHORT).show()
     }
+
 
     override fun onPaymentError(errorCode: Int, response: String?) {
         // Payment failed. You can handle the failure scenario here.
@@ -26,7 +21,7 @@ class PaymentResultListener(private val context: Context) : PaymentResultListene
 
         Toast.makeText(
             context,
-            "Payment failed. Error code: $errorCode\nError Response: $response",
+            "Payment failed in class. Error code: $errorCode\nError Response: $response",
             Toast.LENGTH_LONG
         ).show()
     }

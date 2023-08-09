@@ -18,6 +18,7 @@ import com.example.sellspot.utils.Constants
 import com.razorpay.Checkout
 import org.json.JSONObject
 
+
 // TODO Step 1: Create a CheckoutActivity.
 // START
 /**
@@ -40,6 +41,8 @@ class CheckoutActivity : BaseActivity() {
     // A global variable for Order details.
     private lateinit var mOrderDetails: Order
     // END
+
+    private val RAZORPAY_REQUEST_CODE = 123
 
     private lateinit var binding: ActivityCheckoutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -236,7 +239,7 @@ class CheckoutActivity : BaseActivity() {
     /**
      * A function to notify the success result of the order placed.
      */
-    fun orderPlacedSuccess() {
+    fun  orderPlacedSuccess() {
 
 //        hideProgressDialog()
 //
@@ -261,9 +264,10 @@ class CheckoutActivity : BaseActivity() {
         // START
         // Hide the progress dialog.
         hideProgressDialog()
-
-        Toast.makeText(this@CheckoutActivity, "Your order placed successfully.", Toast.LENGTH_SHORT)
-            .show()
+///*******************************
+        showErrorSnackBar("Your order placed successfully.", true)
+//        Toast.makeText(this@CheckoutActivity, "Your order placed successfully.", Toast.LENGTH_SHORT)
+//            .show()
 
         val intent = Intent(this@CheckoutActivity, DashboardActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -287,15 +291,44 @@ class CheckoutActivity : BaseActivity() {
             options.put("currency", "USD") // Use USD for US Dollar
             options.put("amount", (mTotalAmount * 100).toLong()) // Convert dollar amount to cents
 
-            // Start the payment process with PaymentResultListener as an anonymous object
+            // Start the payment process
             razorpay.open(this, options)
         } catch (e: Exception) {
             e.printStackTrace()
-            Toast.makeText(this, "Error in payment: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error in payment: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
+    // Implement the onPaymentSuccess method
+    fun onPaymentSuccess(paymentId: String) {
+        // Handle the payment success here
+        placeAnOrder()
+    }
+
+    // Implement the onPaymentError method
+    fun onPaymentError(errorCode: Int, response: String?) {
+        // Handle the payment failure here
+        showErrorSnackBar("Payment failed. Please Try again. \nError : $response ", true)
+//        Toast.makeText(this, "*****Payment failed. Error code: $errorCode\nError Response: $response", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RAZORPAY_REQUEST_CODE) {
+            val paymentID = data?.getStringExtra("payment_id") // Replace with the actual key for payment ID
+            val signature = data?.getStringExtra("signature") // Replace with the actual key for signature
+
+            if (resultCode == RESULT_OK && signature != null) {
+                // Handle successful payment
+                placeAnOrder()
+            } else {
+                // Handle payment failure
+                Toast.makeText(this, "Payment failed.", Toast.LENGTH_LONG).show()
 
 
+            }
+        }
+    }
 
 }
