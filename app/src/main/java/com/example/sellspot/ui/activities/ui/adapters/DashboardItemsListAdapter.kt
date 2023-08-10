@@ -164,7 +164,7 @@ open class DashboardItemsListAdapter(
         fun onClick(position: Int, product: Product)
     }
 
-    /**
+    /**m
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
     inner class MyViewHolder(private val binding: ItemDashboardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
