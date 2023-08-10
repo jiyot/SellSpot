@@ -26,26 +26,28 @@ class SpllashActivity : AppCompatActivity() {
         val data: Uri? = intent.data
         if (data != null) {
             // Handle the deep link data here
-            // You can extract the necessary information from the 'data' URI
-            // and perform any required actions
-
-            // For example, you can extract query parameters like this:
-            val productId = data.getQueryParameter("productId")
-            val userId = data.getQueryParameter("userId")
-
-            // Log the productId and userId
-            Log.d("DeepLink", "Product ID: $productId")
-            Log.d("DeepLink", "User ID: $userId")
-
-            // Perform the necessary actions based on the extracted data
-            // ...
-
-            // Proceed to the main flow of your app
-            launchMainActivity()
+            handleDeepLink(data)
         } else {
             // If not started by a deep link, proceed to the main flow immediately
             launchMainActivity()
         }
+    }
+
+    private fun handleDeepLink(data: Uri) {
+        // Extract query parameters
+        val productId = data.getQueryParameter("productId")
+        val userId = data.getQueryParameter("userId")
+
+        // Log the extracted parameters
+        Log.d("DeepLink", "Product ID: $productId")
+        Log.d("DeepLink", "User ID: $userId")
+
+        // TODO: Perform actions based on the extracted parameters
+        // For example, you can open a specific screen or perform an action
+        // based on the productId and userId.
+
+        // For now, just proceed to the main flow
+        launchMainActivity()
     }
 
     private fun launchMainActivity() {

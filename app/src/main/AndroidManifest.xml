@@ -71,21 +71,41 @@
             <!-- Other receiver attributes -->
         </receiver>
 
+<!--        <activity-->
+<!--            android:name=".ui.activities.ui.activities.ProductDetailsActivity"-->
+<!--            android:exported="false"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            android:theme="@style/AppTheme.NoActionBar">-->
+
+<!--            <intent-filter>-->
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+
+<!--                &lt;!&ndash; Replace "sellspotapp" with your chosen scheme and "example.com" with your chosen host &ndash;&gt;-->
+<!--                <data-->
+<!--                    android:scheme="sellspotapp"-->
+<!--                    android:host="example.com" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
         <activity
             android:name=".ui.activities.ui.activities.ProductDetailsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <intent-filter>
+            android:launchMode="singleTop"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <!-- Replace "sellspotapp" with your chosen scheme and "example.com" with your chosen host -->
                 <data
-                    android:scheme="sellspotapp"
+                    android:scheme="http"
+                    android:host="example.com" />
+                <data
+                    android:scheme="https"
                     android:host="example.com" />
             </intent-filter>
         </activity>
+
 
         <activity
             android:name=".ui.activities.ui.activities.CartListActivity"
@@ -159,7 +179,10 @@
 
                 <!-- Replace "sellspotapp" with your chosen scheme and "example.com" with your chosen host -->
                 <data
-                    android:scheme="sellspotapp"
+                    android:scheme="http"
+                    android:host="example.com" />
+                <data
+                    android:scheme="https"
                     android:host="example.com" />
             </intent-filter>
 

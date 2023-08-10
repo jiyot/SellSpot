@@ -1,6 +1,7 @@
 package com.example.sellspot.ui.activities.ui.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
@@ -29,6 +30,14 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val data: Uri? = intent.data
+        if (data != null) {
+            val productId = data.getQueryParameter("productId")
+            val userId = data.getQueryParameter("userId")
+
+            // Use productId and userId as needed
+        }
 
 //        if (intent.hasExtra(Constants.EXTRA_PRODUCT_ID)) {
 //            mProductId = intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
@@ -102,18 +111,23 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun shareProduct() {
-        val message = "I found this amazing product: ${mProductDetails.title}\n\n${mProductDetails.description}"
+        val message = "I found this amazing product: \n \n ${mProductDetails.title} \n\n${mProductDetails.description} \n Download Now! "
 
         // Create the deep link URL
-        val deepLinkUrl = "sellspotapp://example.com?productId=$mProductId&userId=$mProductOwnerId"
+        val deepLinkUrl = Uri.parse("sellspotapp://example.com")
+            .buildUpon()
+//            .appendQueryParameter("productId", mProductId)
+//            .appendQueryParameter("userId", mProductOwnerId)
+            .build()
+            .toString()
 
         // Create a share intent with the message as HTML
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "text/html"
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Check out this product")
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Check out this New App: SellSpot")
         shareIntent.putExtra(
             Intent.EXTRA_TEXT,
-            Html.fromHtml("$message<br><br>Open in SellSpot: \n <a href=\"$deepLinkUrl\">$deepLinkUrl</a>", Html.FROM_HTML_MODE_LEGACY)
+            Html.fromHtml("$message<br><br> SellSpot: \n <a href=\"$deepLinkUrl\">$deepLinkUrl</a>", Html.FROM_HTML_MODE_LEGACY)
         )
 
         // Create a chooser intent to give the user the option to share via the app or other apps
