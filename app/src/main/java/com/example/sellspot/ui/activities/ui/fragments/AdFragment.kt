@@ -9,6 +9,8 @@ import com.example.sellspot.R
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 
+
+
 class AdFragment : Fragment() {
 
     private lateinit var adView: AdView
@@ -35,3 +37,4 @@ class AdFragment : Fragment() {
         adView.destroy()
     }
 }
+

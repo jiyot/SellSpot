@@ -7,39 +7,32 @@
     app:ignore="NamespaceTypo">
 
     <!-- Full-page ad content here -->
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
-
     <TextView
         android:id="@+id/tv_sale_banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/app_gradient_color_background"
+        android:gravity="center"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:background="@drawable/app_gradient_color_background"
         android:text="SALE!"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textSize="72sp"
         android:textStyle="bold"
-        android:gravity="center" />
+        android:layout_margin="10dp"/>
 
     <TextView
         android:id="@+id/tv_sale_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_sale_banner"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:text="Sale Starts from 12 July"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:foregroundGravity="center"
         android:gravity="center" />
 
     <Button
@@ -54,12 +47,16 @@
 
     <ImageButton
         android:id="@+id/iv_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_close"
+        android:layout_width="65dp"
+        android:layout_height="72dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="1dp"
+        android:background="@android:color/transparent"
         android:padding="16dp"
-        android:background="@android:color/transparent" />
+        android:src="@drawable/ic_close" />
+
+    ]
 
 </RelativeLayout>
