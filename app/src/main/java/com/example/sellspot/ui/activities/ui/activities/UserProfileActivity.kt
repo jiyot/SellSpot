@@ -241,49 +241,52 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
     /**
      * A function to validate the input entries for profile details.
      */
+
     private fun validateUserProfileDetails(): Boolean {
-        return when {
+        val firstName = binding.etFirstName.text.toString().trim()
+        val lastName = binding.etLastName.text.toString().trim()
+        val mobileNumber = binding.etMobileNumber.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
 
-            // We have kept the user profile picture is optional.
-            // The FirstName, LastName, and Email Id are not editable when they come from the login screen.
-            // The Radio button for Gender always has the default selected value.
-
-            // Check if the mobile number is not empty as it is mandatory to enter.
-            TextUtils.isEmpty(binding.etMobileNumber.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_mobile_number), true)
-                false
-            }
-            else -> {
-                true
-            }
+        if (TextUtils.isEmpty(firstName)) {
+            showErrorSnackBar(getString(R.string.err_msg_enter_first_name), true)
+            return false
         }
+
+        if (TextUtils.isEmpty(lastName)) {
+            showErrorSnackBar(getString(R.string.err_msg_enter_last_name), true)
+            return false
+        }
+
+        val phonePattern = "^[0-9]{10}$"
+        if (!mobileNumber.matches(Regex(phonePattern))) {
+            showErrorSnackBar(getString(R.string.err_msg_invalid_mobile_number), true)
+            return false
+        }
+
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        if (!email.matches(Regex(emailPattern))) {
+            showErrorSnackBar(getString(R.string.err_msg_invalid_email), true)
+            return false
+        }
+
+        return true
     }
 
-
-    /**
-     * A function to update user profile details to the firestore.
-     */
     private fun updateUserProfileDetails() {
-
         val userHashMap = HashMap<String, Any>()
 
-        // TODO Step 5: Update the code if user is about to Edit Profile details instead of Complete Profile.
-        // Get the FirstName from editText and trim the space
-        val firstName = binding.etFirstName.text.toString().trim { it <= ' ' }
+        val firstName = binding.etFirstName.text.toString().trim()
         if (firstName != mUserDetails.firstName) {
             userHashMap[Constants.FIRST_NAME] = firstName
         }
 
-        // Get the LastName from editText and trim the space
-        val lastName = binding.etLastName.text.toString().trim { it <= ' ' }
+        val lastName = binding.etLastName.text.toString().trim()
         if (lastName != mUserDetails.lastName) {
             userHashMap[Constants.LAST_NAME] = lastName
         }
 
-        // TODO Step 6: Email ID is not editable so we don't need to add it here to get the text from EditText.
-
-        // Here we get the text from editText and trim the space
-        val mobileNumber = binding.etMobileNumber.text.toString().trim { it <= ' ' }
+        val mobileNumber = binding.etMobileNumber.text.toString().trim()
         val gender = if (binding.rbMale.isChecked) {
             Constants.MALE
         } else {
@@ -298,7 +301,6 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             userHashMap[Constants.IMAGE] = mUserProfileImageURL
         }
 
-        // TODO Step 7: Update the code here if it is to edit the profile.
         if (mobileNumber.isNotEmpty() && mobileNumber != mUserDetails.mobile.toString()) {
             userHashMap[Constants.MOBILE] = mobileNumber.toLong()
         }
@@ -307,20 +309,98 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             userHashMap[Constants.GENDER] = gender
         }
 
-        // Here if user is about to complete the profile then update the field or else no need.
-        // 0: User profile is incomplete.
-        // 1: User profile is completed.
         if (mUserDetails.profileCompleted == 0) {
             userHashMap[Constants.COMPLETE_PROFILE] = 1
         }
-        // END
 
-        // call the registerUser function of FireStore class to make an entry in the database.
         FirebaseClass().updateUserProfileData(
             this@UserProfileActivity,
             userHashMap
         )
     }
+
+
+
+//    private fun validateUserProfileDetails(): Boolean {
+//        return when {
+//
+//            // We have kept the user profile picture is optional.
+//            // The FirstName, LastName, and Email Id are not editable when they come from the login screen.
+//            // The Radio button for Gender always has the default selected value.
+//
+//            // Check if the mobile number is not empty as it is mandatory to enter.
+//            TextUtils.isEmpty(binding.etMobileNumber.text.toString().trim { it <= ' ' }) -> {
+//                showErrorSnackBar(resources.getString(R.string.err_msg_enter_mobile_number), true)
+//                false
+//            }
+//            else -> {
+//                true
+//            }
+//        }
+//    }
+//
+//
+//    /**
+//     * A function to update user profile details to the firestore.
+//     */
+//    private fun updateUserProfileDetails() {
+//
+//        val userHashMap = HashMap<String, Any>()
+//
+//        // TODO Step 5: Update the code if user is about to Edit Profile details instead of Complete Profile.
+//        // Get the FirstName from editText and trim the space
+//        val firstName = binding.etFirstName.text.toString().trim { it <= ' ' }
+//        if (firstName != mUserDetails.firstName) {
+//            userHashMap[Constants.FIRST_NAME] = firstName
+//        }
+//
+//        // Get the LastName from editText and trim the space
+//        val lastName = binding.etLastName.text.toString().trim { it <= ' ' }
+//        if (lastName != mUserDetails.lastName) {
+//            userHashMap[Constants.LAST_NAME] = lastName
+//        }
+//
+//        // TODO Step 6: Email ID is not editable so we don't need to add it here to get the text from EditText.
+//
+//        // Here we get the text from editText and trim the space
+//        val mobileNumber = binding.etMobileNumber.text.toString().trim { it <= ' ' }
+//        val gender = if (binding.rbMale.isChecked) {
+//            Constants.MALE
+//        } else {
+//            Constants.FEMALE
+//        }
+//
+//        if (mobileNumber.isNotEmpty()) {
+//            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
+//        }
+//
+//        if (mUserProfileImageURL.isNotEmpty()) {
+//            userHashMap[Constants.IMAGE] = mUserProfileImageURL
+//        }
+//
+//        // TODO Step 7: Update the code here if it is to edit the profile.
+//        if (mobileNumber.isNotEmpty() && mobileNumber != mUserDetails.mobile.toString()) {
+//            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
+//        }
+//
+//        if (gender.isNotEmpty() && gender != mUserDetails.gender) {
+//            userHashMap[Constants.GENDER] = gender
+//        }
+//
+//        // Here if user is about to complete the profile then update the field or else no need.
+//        // 0: User profile is incomplete.
+//        // 1: User profile is completed.
+//        if (mUserDetails.profileCompleted == 0) {
+//            userHashMap[Constants.COMPLETE_PROFILE] = 1
+//        }
+//        // END
+//
+//        // call the registerUser function of FireStore class to make an entry in the database.
+//        FirebaseClass().updateUserProfileData(
+//            this@UserProfileActivity,
+//            userHashMap
+//        )
+//    }
 
     /**
      * A function to notify the success result and proceed further accordingly after updating the user details.

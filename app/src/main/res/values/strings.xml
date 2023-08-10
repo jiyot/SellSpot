@@ -207,6 +207,8 @@
     <string name="remember_me">Remember Me</string>
     <string name="lbl_product_details_user">Product Seller</string>
     <string name="profile_picture">picture</string>
+    <string name="err_msg_invalid_mobile_number">Invalid Number</string>
+    <string name="err_msg_invalid_email">Invalid Email</string>
 
 
 </resources>
