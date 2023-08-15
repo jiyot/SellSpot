@@ -186,7 +186,7 @@
                     android:checked="true"
                     android:gravity="center"
                     android:text="@string/lbl_home"
-                    android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                    android:textColor="@drawable/drawable_gender_tab_selector"
                     android:textStyle="bold" />
 
                 <com.example.sellspot.utils.SSRadioButton

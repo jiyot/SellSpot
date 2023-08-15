@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/user_layout"
+        android:background="@color/colorLightGrey"
         app:layout_constraintTop_toTopOf="parent"
         />
 

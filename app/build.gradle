@@ -41,8 +41,18 @@ android {
         jvmTarget = '1.8'
     }
 
+    signingConfigs {
+        release {
+            storeFile file('/Users/jiyotbabrah/Desktop/signed/sellspot.keystore')
+            storePassword '123456'
+            keyAlias 'sellspot'
+            keyPassword '123456'
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
