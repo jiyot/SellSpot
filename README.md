@@ -7,7 +7,7 @@
 
 ### Video Demo
 
-[![SellSpot Video Demo](https://imgur.com/a/cRSOiQw)](https://drive.google.com/file/d/1yfvWhAKQyw9r7k4DA6mecYiG62GgGJdz/view?usp=sharing)
+[![SellSpot Video Demo](https://imgur.com/CvMUcCR)](https://drive.google.com/file/d/1yfvWhAKQyw9r7k4DA6mecYiG62GgGJdz/view?usp=sharing)
 
 
 
