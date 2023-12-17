@@ -3,7 +3,7 @@
 
 ### Video Demo
 
-[![SellSpot Video Demo](https://imgur.com/a/cRSOiQw)](https://drive.google.com/file/d/1rC8KL830jhfh95Li3SVBA2LbsMTB9KIB/view?usp=sharing)
+[![SellSpot Video Demo](https://imgur.com/a/cRSOiQw)](https://drive.google.com/file/d/1yfvWhAKQyw9r7k4DA6mecYiG62GgGJdz/view?usp=sharing)
 
 
 
