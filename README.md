@@ -1,16 +1,11 @@
 # SellSpot
 # SellSpot: An Advanced Android E-Commerce App
 
-### Video Demo
-
-[![SellSpot Video Demo](https://imgur.com/a/cRSOiQw)](https://drive.google.com/file/d/1yfvWhAKQyw9r7k4DA6mecYiG62GgGJdz/view?usp=sharing)
-
-### Video Demo
-
-[![SellSpot Video Demo](https://imgur.com/CvMUcCR)](https://drive.google.com/file/d/1yfvWhAKQyw9r7k4DA6mecYiG62GgGJdz/view?usp=sharing)
 
 
-![SellSpot pptx](https://github.com/jiyot/SellSpot/assets/126514800/d3c6226f-57bc-401f-9c4d-5e68f7f7f137)
+### Video Demo- Click to Play
+
+[![SellSpot Video Demo](https://github.com/jiyot/SellSpot/assets/126514800/d3c6226f-57bc-401f-9c4d-5e68f7f7f137)](https://drive.google.com/file/d/1yfvWhAKQyw9r7k4DA6mecYiG62GgGJdz/view?usp=sharing)
 
 
 
