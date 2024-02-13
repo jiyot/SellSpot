@@ -9,7 +9,7 @@
 
 
 
-SellSpot is an advanced Android E-Commerce application built with Kotlin, Firebase Realtime Database, WebSockets, Payment Gateway Integration, and Social Media Sharing. This app provides a secure, real-time, and user-friendly platform for seamless buying and selling experiences.
+SellSpot is an advanced Android E-Commerce application built with Kotlin, Firebase Realtime Database, Payment Gateway Integration, and Social Media Sharing. This app provides a secure, real-time, and user-friendly platform for seamless buying and selling experiences.
 
 ## Introduction
 
